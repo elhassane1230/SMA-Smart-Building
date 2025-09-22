@@ -46,9 +46,9 @@ Le système a besoin de clés API pour interroger les modèles de langage (LLM).
 
 ### Obtenir les clés :
 
-   1. Groq : Allez sur console.groq.com/keys, créez une clé et copiez-la.
+   1. Groq : Allez sur `console.groq.com/keys`, créez une clé et copiez-la.
 
-   2. OpenRouter : Allez sur openrouter.ai/keys, créez une clé et copiez-la.
+   2. OpenRouter : Allez sur `openrouter.ai/keys`, créez une clé et copiez-la.
 ### Créer le fichier `.env` :
 
 1. Créez un fichier nommé .env à la racine du projet.
