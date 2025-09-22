@@ -1,0 +1,13 @@
+# Fichier pour ignorer les secrets
+.env
+
+# Fichiers de cache Python
+__pycache__/
+*.pyc
+
+# Dossiers d'environnement virtuel
+venv/
+env/
+
+# Fichiers de cache Jupyter Notebook
+.ipynb_checkpoints/

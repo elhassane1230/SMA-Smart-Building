@@ -1,0 +1,1904 @@
+@prefix : <http://monbatiment.com/ontologie/SMA4SB#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@base <http://monbatiment.com/ontologie/SMA4SB#> .
+
+<http://monbatiment.com/ontologie/SMA4SB> rdf:type owl:Ontology .
+
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourBeneficeAdditionnel
+:aPourBeneficeAdditionnel rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Intention ;
+                          rdfs:range :BeneficeAdditionnel ;
+                          rdfs:comment "Relie une intention (action) a un benefice synergique qu'elle produit." ;
+                          rdfs:label "a pour benefice additionnel" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourBesoin
+:aPourBesoin rdf:type owl:ObjectProperty ;
+             rdfs:domain :Espace ;
+             rdfs:range :Besoin ;
+             rdfs:comment "Relie une piece a un besoin identifie la concernant." ;
+             rdfs:label "a pour besoin" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourCO2Actuel
+:aPourCO2Actuel rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :Piece ;
+                rdfs:comment "La mesure de CO2 actuelle pour cette piece." ;
+                rdfs:label "a pour CO2 actuel" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourCibleEquipement
+:aPourCibleEquipement rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain :Intention ;
+                      rdfs:range :Equipement ;
+                      rdfs:comment "Indique l'equipement (capteur ou actionneur) cible d'une intention." ;
+                      rdfs:label "a pour cible equipement" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourEtat
+:aPourEtat rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Equipement ;
+           rdfs:range :Etat ;
+           rdfs:comment "L'etat actuel de l'equipement." ;
+           rdfs:label "a pour etat" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourHumiditeActuelle
+:aPourHumiditeActuelle rdf:type owl:ObjectProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Piece ;
+                       rdfs:comment "La mesure d'humidite actuelle pour cette piece." ;
+                       rdfs:label "a pour humidite actuelle" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourLuminositeActuelle
+:aPourLuminositeActuelle rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain :Piece ;
+                         rdfs:comment "La mesure de luminosite actuelle pour cette piece." ;
+                         rdfs:label "a pour luminosite actuelle" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourOccupationActuelle
+:aPourOccupationActuelle rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain :Piece ;
+                         rdfs:comment "La mesure d'occupation actuelle pour cette piece." ;
+                         rdfs:label "a pour occupation actuelle" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourTemperatureActuelle
+:aPourTemperatureActuelle rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain :Piece ;
+                          rdfs:comment "La mesure de temperature actuelle pour cette piece." ;
+                          rdfs:label "a pour temperature actuelle" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourUnite
+:aPourUnite rdf:type owl:ObjectProperty ;
+            rdfs:domain :Mesure ;
+            rdfs:range :UniteDeMesure ;
+            rdfs:comment "Relie une mesure a son unite de mesure standardisee." ;
+            rdfs:label "a pour unite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPublieIntention
+:aPublieIntention rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Agent ;
+                  rdfs:range :Intention ;
+                  rdfs:comment "Relie un agent a une intention qu'il a publiee." ;
+                  rdfs:label "a publie intention" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#genereParAgent
+:genereParAgent rdf:type owl:ObjectProperty ;
+                rdfs:domain owl:Thing ;
+                rdfs:range :Agent ;
+                rdfs:comment "Indique quel agent a genere l'entite (intention, conflit, etc.)." ;
+                rdfs:label "genere par agent" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#aResoluIntention
+:aResoluIntention rdf:type owl:ObjectProperty ;
+                  rdfs:range :Intention ;
+                  rdfs:comment "Relie un log de resolution a l'intention qui a ete directement affectee (supprimee ou validee)." ;
+                  rdfs:label "a resolu intention" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#arbitreLeConflit
+:arbitreLeConflit rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ConflitResolu ;
+                  rdfs:range :Conflit ;
+                  rdfs:comment "Relie une resolution au conflit ou a l'objection qu'elle arbitre." ;
+                  rdfs:label "arbitre le conflit" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#concerneConflit
+:concerneConflit rdf:type owl:ObjectProperty ;
+                 rdfs:domain :ConflitResolu ;
+                 rdfs:range :Conflit ;
+                 rdfs:comment "Relie une resolution a l'instance de conflit qu'elle resout." ;
+                 rdfs:label "concerne conflit" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#concerneEquipement
+:concerneEquipement rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Piece ;
+                    rdfs:range :Equipement ;
+                    rdfs:comment "Relie une entite (comme une intention ou un log) a un equipement specifique." ;
+                    rdfs:label "concerne equipement" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#concerneOccupant
+:concerneOccupant rdf:type owl:ObjectProperty ;
+                  rdfs:domain :EvenementCalendrier ;
+                  rdfs:range :Occupant ;
+                  rdfs:comment "Relie un evenement de calendrier a l'occupant concerne." ;
+                  rdfs:label "concerne l'occupant" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#concerneIntention
+:concerneIntention rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Conflit ;
+                   rdfs:range :Intention ;
+                   rdfs:comment "Relie un conflit aux intentions qui le composent." ;
+                   rdfs:label "concerne intention" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#contientEquipement
+:contientEquipement rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Espace ;
+                    rdfs:range :Equipement ;
+                    rdfs:comment "Relie un espace a un equipement qu'il contient." ;
+                    rdfs:label "contient equipement" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#contientEtage
+:contientEtage rdf:type owl:ObjectProperty ;
+               rdfs:range :Etage ;
+               rdfs:comment "Le batiment contient cet etage." ;
+               rdfs:label "contient etage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#contientPiece
+:contientPiece rdf:type owl:ObjectProperty ;
+               rdfs:domain :Etage ;
+               rdfs:range :Piece ;
+               rdfs:comment "L'etage contient cette piece." ;
+               rdfs:label "contient piece" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#creePar
+:creePar rdf:type owl:ObjectProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Resolution ;
+         rdfs:range :Agent ;
+         rdfs:comment "L'agent qui a cree la resolution." ;
+         rdfs:label "cree par" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#estEnConflitAvec
+:estEnConflitAvec rdf:type owl:ObjectProperty ,
+                           owl:SymmetricProperty ;
+                  rdfs:domain :Intention ;
+                  rdfs:range :Intention ;
+                  rdfs:comment "Indique qu'une intention est en conflit avec une autre intention." ;
+                  rdfs:label "est en conflit avec" .
+
+
+
+    
+###  http://monbatiment.com/ontologie/SMA4SB#estUneObjectionA
+:estUneObjectionA rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Objection ;
+                  rdfs:range :Intention ;
+                  rdfs:comment "Relie une objection a l'intention qu'elle conteste." ;
+                  rdfs:label "est une objection a" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#identifiePar
+:identifiePar rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Conflit ;
+              rdfs:range :Agent ;
+              rdfs:comment "L'agent qui a identifie ce conflit." ;
+              rdfs:label "identifie par" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#intentionValidee
+:intentionValidee rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ConflitResolu ;
+                  rdfs:range :Intention ;
+                  rdfs:comment "Relie une resolution a l'intention qui a ete finalement choisie ou validee." ;
+                  rdfs:label "intention validee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#interagitDans
+:interagitDans rdf:type owl:ObjectProperty ;
+               rdfs:domain :Agent ;
+               rdfs:range :Espace ;
+               rdfs:comment "Relie un agent a un espace physique dans lequel il opere." ;
+               rdfs:label "interagit dans" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#occupe
+:occupe rdf:type owl:ObjectProperty ;
+        rdfs:domain :Occupant ;
+        rdfs:range :Espace ;
+        rdfs:comment "L'occupant occupe cette piece (ex: son bureau principal)." ;
+        rdfs:label "occupe" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#produitResultat
+:produitResultat rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :Simulation ;
+                 rdfs:range :SimulationResult ;
+                 rdfs:comment "La simulation produit ce resultat." ;
+                 rdfs:label "produit resultat" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#proposeAlternative
+:proposeAlternative rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Objection ;
+                    rdfs:range :ContreProposition ;
+                    rdfs:comment "Relie une objection a la contre-proposition qu'elle suggere." ;
+                    rdfs:label "propose alternative" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#proposeEtatActionneur
+:proposeEtatActionneur rdf:type owl:ObjectProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Intention ;
+                       rdfs:range :Etat ;
+                       rdfs:comment "L'etat d'actionneur specifique propose par cette intention (ex: EtatActif, EtatOuverte)." ;
+                       rdfs:label "propose etat actionneur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#simuleIntention
+:simuleIntention rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :Simulation ;
+                 rdfs:range :Intention ;
+                 rdfs:comment "La simulation vise a evaluer cette intention." ;
+                 rdfs:label "simule intention" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#validePar
+:validePar rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Resolution ;
+           rdfs:range :Agent ;
+           rdfs:comment "L'agent qui a valide cette resolution." ;
+           rdfs:label "valide par" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#viseZone
+:viseZone rdf:type owl:ObjectProperty ;
+          rdfs:range :Espace ; 
+          rdfs:domain :Conflit ,
+                      :Intention ,
+                      :Resolution ,
+                      :Simulation ;
+          rdfs:comment "L'intention ou le conflit concerne cet espace." ;
+          rdfs:label "vise zone" .
+
+# http://monbatiment.com/ontologie/SMA4SB#aPourStatut
+:aPourStatut rdf:type owl:ObjectProperty ;
+             rdfs:domain :Intention ;
+             rdfs:range :StatutIntention ;
+             rdfs:comment "Definit l'etat actuel d'une intention dans le processus de decision decentralise." ;
+             rdfs:label "a pour statut" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourTemperatureExterieure
+:aPourTemperatureExterieure rdf:type owl:DatatypeProperty ;
+                            rdfs:range xsd:decimal ;
+                            rdfs:comment "La derniere mesure de temperature exterieure connue pour le batiment." ;
+                            rdfs:label "a pour temperature exterieure" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#aPourValeur
+:aPourValeur rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Mesure ;
+             rdfs:range xsd:decimal ;
+             rdfs:comment "La valeur numerique de la mesure." ;
+             rdfs:label "a pour valeur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#capaciteThermique
+:capaciteThermique rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "Capacite thermique de la zone en Joules par Kelvin (J/K)." ;
+                   rdfs:label "capacite thermique" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#co2Final
+:co2Final rdf:type owl:DatatypeProperty ;
+          rdfs:domain :SimulationResult ;
+          rdfs:range xsd:decimal ;
+          rdfs:label "CO2 final" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#creeLe
+:creeLe rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain :Conflit ,
+                    :Etat ,
+                    :Intention ,
+                    :Mesure ,
+                    :Resolution ,
+                    :Simulation ;
+        rdfs:range xsd:dateTime ;
+        rdfs:comment "Horodatage de la creation de l'entite." ;
+        rdfs:label "cree le" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#description
+:description rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Conflit ,
+                         :Intention ,
+                         :Resolution ,
+                         :SimulationResult ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Description textuelle de l'entite." ;
+             rdfs:label "description" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#energieConsommee
+:energieConsommee rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :SimulationResult ;
+                  rdfs:range xsd:decimal ;
+                  rdfs:label "energie consommee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#estOccupee
+:estOccupee rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Piece ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "Indique si la piece est actuellement occupee." ;
+            rdfs:label "est occupee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#gainSolaireMax
+:gainSolaireMax rdf:type owl:DatatypeProperty ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Le gain solaire maximal pour une zone en Watts (W), representant l'apport de chaleur par le soleil par temps clair." ;
+                rdfs:label "gain solaire max" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#gravite
+:gravite rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Conflit ;
+         rdfs:range xsd:integer ;
+         rdfs:comment "Niveau de gravite d'un conflit (ex: 1-10)." ;
+         rdfs:label "gravite" .
+
+
+### http://monbatiment.com/ontologie/SMA4SB#heureDebut
+:heureDebut rdf:type owl:DatatypeProperty ;
+            rdfs:domain :EvenementCalendrier ;
+            rdfs:range xsd:dateTime ;
+            rdfs:comment "L'heure de debut d'un evenement planifie." ;
+            rdfs:label "heure de debut" .
+
+### http://monbatiment.com/ontologie/SMA4SB#heureFin
+:heureFin rdf:type owl:DatatypeProperty ;
+          rdfs:domain :EvenementCalendrier ;
+          rdfs:range xsd:dateTime ;
+          rdfs:comment "L'heure de fin d'un evenement planifie." ;
+          rdfs:label "heure de fin" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#horaireResultant
+:horaireResultant rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Resolution ,
+                              :SimulationResult ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "Horaire resultant d'une resolution ou d'une simulation." ;
+                  rdfs:label "horaire resultant" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#horaireSouhaite
+:horaireSouhaite rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :Intention ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Horaire souhaite pour la realisation de l'intention." ;
+                 rdfs:label "horaire souhaite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#humiditeFinale
+:humiditeFinale rdf:type owl:DatatypeProperty ;
+                rdfs:domain :SimulationResult ;
+                rdfs:range xsd:decimal ;
+                rdfs:label "humidite finale" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#nomAgent
+:nomAgent rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Agent ;
+          rdfs:range xsd:string ;
+          rdfs:comment "Nom lisible par l'humain de l'agent." ;
+          rdfs:label "nom agent" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#nomZone
+:nomZone rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Espace ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Nom lisible par l'humain de la zone." ;
+         rdfs:label "nom zone" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#preferenceCO2
+:preferenceCO2 rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Occupant ;
+               rdfs:range xsd:decimal ;
+               rdfs:comment "Niveau de CO2 prefere par l'occupant." ;
+               rdfs:label "preference CO2" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#preferenceLuminosite
+:preferenceLuminosite rdf:type owl:DatatypeProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain :Occupant ;
+                      rdfs:range xsd:decimal ;
+                      rdfs:comment "Niveau de luminosite prefere par l'occupant." ;
+                      rdfs:label "preference luminosite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#preferenceTemperature
+:preferenceTemperature rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Occupant ;
+                       rdfs:range xsd:decimal ;
+                       rdfs:comment "Temperature preferee par l'occupant." ;
+                       rdfs:label "preference temperature" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#resistanceThermiqueMurs
+:resistanceThermiqueMurs rdf:type owl:DatatypeProperty ;
+                         rdfs:range xsd:decimal ;
+                         rdfs:comment "Resistance thermique des murs en Kelvin par Watt (K/W)." ;
+                         rdfs:label "resistance thermique des murs" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#scoreCompromis
+:scoreCompromis rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :Resolution ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Score d'evaluation du compromis atteint." ;
+                rdfs:label "score compromis" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#temperatureFinale
+:temperatureFinale rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain :SimulationResult ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "Temperature finale predite par la simulation." ;
+                   rdfs:label "temperature finale" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#temperatureResultante
+:temperatureResultante rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Resolution ;
+                       rdfs:range xsd:decimal ;
+                       rdfs:comment "Temperature resultante de la resolution." ;
+                       rdfs:label "temperature resultante" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#tempsPourAtteindreConsigne
+:tempsPourAtteindreConsigne rdf:type owl:DatatypeProperty ;
+                            rdfs:domain :SimulationResult ;
+                            rdfs:range xsd:decimal ;
+                            rdfs:label "temps pour atteindre la consigne" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#timestamp
+:timestamp rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Mesure ;
+           rdfs:range xsd:dateTime ;
+           rdfs:comment "Horodatage de la mesure." ;
+           rdfs:label "horodatage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#typeAgent
+:typeAgent rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Agent ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Type fonctionnel de l'agent (ex: 'Confort', 'energie')." ;
+           rdfs:label "type agent" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#volume
+:volume rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain :Espace ;
+        rdfs:range xsd:decimal ;
+        rdfs:comment "Volume de la zone physique en metres cubes." ;
+        rdfs:label "volume" .
+
+
+# L'action de Fermer un Volet a pour benefice l'economie d'energie pour le rafraichissement.
+:FermerVolet rdfs:subClassOf [ 
+    rdf:type owl:Restriction ;
+    owl:onProperty :aPourBeneficeAdditionnel ;
+    owl:someValuesFrom :EconomieEnergieRafraichissement
+] .
+
+# L'action d'Activer la Ventilation a aussi pour benefice la reduction de l'humidite.
+:ActiverVentilation rdfs:subClassOf [ 
+    rdf:type owl:Restriction ;
+    owl:onProperty :aPourBeneficeAdditionnel ;
+    owl:someValuesFrom :ReductionHumidite
+] .
+
+# L'action d'Activer un Ventilateur de Plafond a pour benefice l'economie d'energie pour le chauffage.
+:ActiverVentilateurPlafond rdfs:subClassOf [ 
+    rdf:type owl:Restriction ;
+    owl:onProperty :aPourBeneficeAdditionnel ;
+    owl:someValuesFrom :EconomieEnergieChauffage
+] .
+
+# L'action d'eteindre (ou diminuer) l'eclairage a pour benefice le bien-etre (rythme circadien).
+:EteindreEclairage rdfs:subClassOf [ 
+    rdf:type owl:Restriction ;
+    owl:onProperty :aPourBeneficeAdditionnel ;
+    owl:someValuesFrom :AmeliorationBienEtre
+] .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://monbatiment.com/ontologie/SMA4SB#Actif
+:Actif rdf:type owl:Class ;
+       rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ActionExecutee
+:ActionExecutee rdf:type owl:Class ;
+                rdfs:subClassOf owl:Thing ;
+                rdfs:comment "Enregistrement d'une action physique executee par un actionneur." ;
+                rdfs:label "Action Executee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Actionneur
+:Actionneur rdf:type owl:Class ;
+            rdfs:subClassOf :Equipement ;
+            rdfs:comment "Dispositif physique qui execute une action." ;
+            rdfs:label "Actionneur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ActiverChauffage
+:ActiverChauffage rdf:type owl:Class ;
+                  rdfs:subClassOf :Intention ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :aPourBeneficeAdditionnel ;
+                                    owl:someValuesFrom :ReductionHumidite
+                                  ] ;
+                  rdfs:comment "Intention d'activer le chauffage." ;
+                  rdfs:label "Activer Chauffage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ActiverVentilation
+:ActiverVentilation rdf:type owl:Class ;
+                    rdfs:subClassOf :Intention ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :aPourBeneficeAdditionnel ;
+                                      owl:someValuesFrom :ReductionHumidite
+                                    ] ;
+                    rdfs:comment "Intention d'activer la ventilation." ;
+                    rdfs:label "Activer Ventilation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Agent
+:Agent rdf:type owl:Class ;
+       rdfs:subClassOf owl:Thing ;
+       rdfs:comment "Entite logicielle qui exprime des intentions ou execute des actions." ;
+       rdfs:label "Agent" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentExecution
+:AgentExecution  rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent qui traduit les decisions en commandes physiques pour les equipements." ;
+                 rdfs:label "Agent Actionneur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentCalendrier
+:AgentCalendrier rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent specialiste qui surveille les evenements du calendrier pour creer des intentions proactives (ex: prechauffage)." ;
+                 rdfs:label "Agent Calendrier" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentConfort
+:AgentConfort rdf:type owl:Class ;
+              rdfs:subClassOf :Agent ;
+              rdfs:comment "Agent specialise dans la gestion du confort des occupants." ;
+              rdfs:label "Agent Confort" .
+
+
+### http://monbatiment.com/ontologie/SMA4SB#AgentMediateur
+:AgentMediateur rdf:type owl:Class ;
+                rdfs:subClassOf :Agent ;
+                rdfs:comment "Agent specialiste qui arbitre les objections entre les intentions." ;
+                rdfs:label "Agent Mediateur" .
+
+### http://monbatiment.com/ontologie/SMA4SB#AgentStratege
+:AgentStratege rdf:type owl:Class ;
+               rdfs:subClassOf :Agent ;
+               rdfs:comment "Agent specialiste qui optimise le plan d'action en choisissant l'intention la plus synergique." ;
+               rdfs:label "Agent Stratege" .
+
+### http://monbatiment.com/ontologie/SMA4SB#AgentPlanificateur
+:AgentPlanificateur rdf:type owl:Class ;
+                    rdfs:subClassOf :Agent ;
+                    rdfs:comment "Agent specialiste qui raffine une intention en un plan d'action concret via la simulation." ;
+                    rdfs:label "Agent Planificateur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentPerception
+:AgentPerception rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent qui collecte et publie les donnees des capteurs." ;
+                 rdfs:label "Agent Donnees" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentEcoEnergie
+:AgentEcoEnergie rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent specialise dans l'optimisation de la consommation energetique." ;
+                 rdfs:label "Agent Economie energie" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentQualiteAir
+:AgentQualiteAir rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent specialise dans la surveillance et la gestion de la qualite de l'air." ;
+                 rdfs:label "Agent Qualite Air" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentSimulation
+:AgentSimulation rdf:type owl:Class ;
+                 rdfs:subClassOf :Agent ;
+                 rdfs:comment "Agent qui execute des simulations pour predire les impacts." ;
+                 rdfs:label "Agent Simulation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Allume
+:Allume rdf:type owl:Class ;
+        rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AllumerEclairage
+:AllumerEclairage rdf:type owl:Class ;
+                  rdfs:subClassOf :Intention ;
+                  rdfs:comment "Intention d'allumer l'eclairage." ;
+                  rdfs:label "Allumer eclairage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AmeliorationBienEtre
+:AmeliorationBienEtre rdf:type owl:Class ;
+                      rdfs:subClassOf :BeneficeAdditionnel ;
+                      rdfs:label "Amelioration du Bien-etre (Rythme Circadien)" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AugmentationLuminositeNaturelle
+:AugmentationLuminositeNaturelle rdf:type owl:Class ;
+                                 rdfs:subClassOf :BeneficeAdditionnel ;
+                                 rdfs:label "Augmentation de la Luminosite Naturelle" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BeneficeAdditionnel
+:BeneficeAdditionnel rdf:type owl:Class ;
+                     rdfs:subClassOf owl:Thing ;
+                     rdfs:comment "Un effet positif ou une synergie resultant d'une action qui n'etait pas son objectif principal." ;
+                     rdfs:label "Benefice Additionnel" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Besoin
+:Besoin rdf:type owl:Class ;
+        rdfs:subClassOf owl:Thing ;
+        rdfs:comment "Classe generique pour un besoin identifie dans le batiment." ;
+        rdfs:label "Besoin" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinChauffage
+:BesoinChauffage rdf:type owl:Class ;
+                 rdfs:subClassOf :Besoin ;
+                 rdfs:comment "Indique qu'une piece a un besoin de chauffage (temperature trop basse)." ;
+                 rdfs:label "Besoin Chauffage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinEconomieEnergie
+:BesoinEconomieEnergie rdf:type owl:Class ;
+                       rdfs:subClassOf :Besoin ;
+                       rdfs:comment "Besoin de reduire la consommation d'energie." ;
+                       rdfs:label "Besoin d'economie d'energie" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinLuminosite
+:BesoinLuminosite rdf:type owl:Class ;
+                  rdfs:subClassOf :Besoin ;
+                  rdfs:comment "Indique qu'une piece a un besoin de luminosite (luminosite trop faible)." ;
+                  rdfs:label "Besoin Luminosite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinRafraichissement
+:BesoinRafraichissement rdf:type owl:Class ;
+                        rdfs:subClassOf :Besoin ;
+                        rdfs:comment "Indique qu'une piece a un besoin de rafraichissement (temperature trop haute)." ;
+                        rdfs:label "Besoin Rafraichissement" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinReductionLuminosite
+:BesoinReductionLuminosite rdf:type owl:Class ;
+                           rdfs:subClassOf :Besoin ;
+                           rdfs:comment "Indique qu'une piece est trop lumineuse (luminosite trop elevee)." ;
+                           rdfs:label "Besoin de Reduction de Luminosite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BesoinVentilation
+:BesoinVentilation rdf:type owl:Class ;
+                   rdfs:subClassOf :Besoin ;
+                   rdfs:comment "Indique qu'une piece a un besoin de ventilation (CO2 trop eleve)." ;
+                   rdfs:label "Besoin Ventilation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CO2
+:CO2 rdf:type owl:Class ;
+     rdfs:subClassOf :Capteur ;
+     rdfs:comment "Capteur de dioxyde de carbone." ;
+     rdfs:label "CO2" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Capteur
+:Capteur rdf:type owl:Class ;
+         rdfs:subClassOf :Equipement ;
+         rdfs:comment "Dispositif physique qui collecte des donnees." ;
+         rdfs:label "Capteur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Climatiseur
+:Climatiseur rdf:type owl:Class ;
+             rdfs:subClassOf :Actionneur ;
+             rdfs:comment "Un systeme de climatisation pour le rafraichissement." ;
+             rdfs:label "Climatiseur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Conflit
+:Conflit rdf:type owl:Class ;
+         rdfs:subClassOf owl:Thing ;
+         rdfs:comment "Desaccord detecte entre des intentions ou des objectifs." ;
+         rdfs:label "Conflit" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ConflitResolu
+:ConflitResolu rdf:type owl:Class ;
+               rdfs:subClassOf :Resolution ;
+               rdfs:comment "Enregistrement d'une decision prise par le mediateur pour arbitrer une objection." ;
+               rdfs:label "Conflit Resolu" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ContreProposition
+:ContreProposition rdf:type owl:Class ;
+                   rdfs:subClassOf :Intention ;
+                   rdfs:comment "Une intention alternative proposee dans le cadre d'une objection." ;
+                   rdfs:label "Contre-Proposition" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#DesactiverChauffage
+:DesactiverChauffage rdf:type owl:Class ;
+                     rdfs:subClassOf :Intention ;
+                     rdfs:comment "Intention de desactiver le chauffage." ;
+                     rdfs:label "Desactiver Chauffage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#DesactiverVentilation
+:DesactiverVentilation rdf:type owl:Class ;
+                       rdfs:subClassOf :Intention ;
+                       rdfs:comment "Intention de desactiver la ventilation." ;
+                       rdfs:label "Desactiver Ventilation" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#EconomieEnergieEclairage
+:EconomieEnergieEclairage rdf:type owl:Class ;
+                          rdfs:subClassOf :BeneficeAdditionnel ;
+                          rdfs:label "economie d'energie (eclairage)" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#EconomieEnergieRafraichissement
+:EconomieEnergieRafraichissement rdf:type owl:Class ;
+                                 rdfs:subClassOf :BeneficeAdditionnel ;
+                                 rdfs:label "economie d'energie (Rafraichissement)" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Equipement
+:Equipement rdf:type owl:Class ;
+            rdfs:comment "Dispositif physique contrôlable ou observable dans le batiment." ;
+            rdfs:label "equipement" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Espace
+:Espace rdf:type owl:Class ;
+        rdfs:subClassOf owl:Thing ;
+        rdfs:comment "Un concept abstrait pour tout espace physique delimite." ;
+        rdfs:label "Espace" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Etage
+:Etage rdf:type owl:Class ;
+       rdfs:subClassOf :Espace ;
+       rdfs:comment "Niveau ou plancher d'un batiment." ;
+       rdfs:label "etage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#EvenementCalendrier
+:EvenementCalendrier rdf:type owl:Class ;
+                     rdfs:subClassOf owl:Thing ;
+                     rdfs:comment "Represente un evenement planifie, comme une reunion ou l'arrivee d'un occupant." ;
+                     rdfs:label "evenement de Calendrier" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Zone
+:Zone rdf:type owl:Class ;
+      rdfs:subClassOf :Espace ; # MODIFIe
+      rdfs:comment "Une zone ou un regroupement arbitraire d'espaces." ;
+      rdfs:label "Zone" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Etat
+:Etat rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:comment "etat d'un equipement ou d'une entite." ;
+      rdfs:label "etat" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#EteindreEclairage
+:EteindreEclairage rdf:type owl:Class ;
+                   rdfs:subClassOf :Intention ;
+                   rdfs:comment "Intention d'eteindre l'eclairage." ;
+                   rdfs:label "eteindre eclairage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Eteint
+:Eteint rdf:type owl:Class ;
+        rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Fenetre
+:Fenetre rdf:type owl:Class ;
+         rdfs:subClassOf :Actionneur ;
+         rdfs:comment "Fenetre pouvant etre ouverte ou fermee." ;
+         rdfs:label "Fenetre" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Fermee
+:Fermee rdf:type owl:Class ;
+        rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#FermerFenetre
+:FermerFenetre rdf:type owl:Class ;
+               rdfs:subClassOf :Intention ;
+               rdfs:comment "Intention de fermer une fenetre." ;
+               rdfs:label "Fermer Fenetre" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Humidificateur
+:Humidificateur rdf:type owl:Class ;
+                rdfs:subClassOf :Actionneur ;
+                rdfs:comment "Un dispositif pour augmenter l'humidite de l'air." ;
+                rdfs:label "Humidificateur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Humidite
+:Humidite rdf:type owl:Class ;
+          rdfs:subClassOf :Capteur ;
+          rdfs:comment "Capteur d'humidite." ;
+          rdfs:label "Humidite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Inactif
+:Inactif rdf:type owl:Class ;
+         rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Intention
+:Intention rdf:type owl:Class ;
+           rdfs:subClassOf owl:Thing ;
+           rdfs:comment "Objectif ou proposition d'action exprimee par un agent." ;
+           rdfs:label "Intention" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Lampe
+:Lampe rdf:type owl:Class ;
+       rdfs:subClassOf :Actionneur ;
+       rdfs:comment "Un dispositif d'eclairage." ;
+       rdfs:label "Lampe" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Luminosite
+:Luminosite rdf:type owl:Class ;
+            rdfs:subClassOf :Capteur ;
+            rdfs:comment "Capteur de luminosite." ;
+            rdfs:label "Luminosite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Mesure
+:Mesure rdf:type owl:Class ;
+        rdfs:subClassOf owl:Thing ;
+        rdfs:comment "Observation ou lecture d'une grandeur physique." ;
+        rdfs:label "Mesure" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureCO2
+:MesureCO2 rdf:type owl:Class ;
+           rdfs:subClassOf :Mesure ;
+           rdfs:comment "Mesure de dioxyde de carbone." ;
+           rdfs:label "Mesure CO2" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureHumidite
+:MesureHumidite rdf:type owl:Class ;
+                rdfs:subClassOf :Mesure ;
+                rdfs:comment "Mesure d'humidite." ;
+                rdfs:label "Mesure Humidite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureLuminosite
+:MesureLuminosite rdf:type owl:Class ;
+                  rdfs:subClassOf :Mesure ;
+                  rdfs:comment "Mesure de luminosite." ;
+                  rdfs:label "Mesure Luminosite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureTemperature
+:MesureTemperature rdf:type owl:Class ;
+                   rdfs:subClassOf :Mesure ;
+                   rdfs:comment "Mesure de temperature." ;
+                   rdfs:label "Mesure Temperature" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureOccupation
+:MesureOccupation rdf:type owl:Class ;
+                  rdfs:subClassOf :Mesure ;
+                  rdfs:comment "Mesure de l'occupation d'une zone, incluant le nombre de personnes." ;
+                  rdfs:label "Mesure d'Occupation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Objection
+:Objection rdf:type owl:Class ;
+           rdfs:subClassOf owl:Thing ;
+           rdfs:comment "Une objection soulevee par un agent a l'encontre d'une intention existante." ;
+           rdfs:label "Objection" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Occupant
+:Occupant rdf:type owl:Class ;
+          rdfs:subClassOf owl:Thing ;
+          rdfs:comment "Personne occupant une zone du batiment." ;
+          rdfs:label "Occupant" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Occupation
+:Occupation rdf:type owl:Class ;
+            rdfs:subClassOf :Capteur ;
+            rdfs:comment "Capteur d'occupation." ;
+            rdfs:label "Occupation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Ouverte
+:Ouverte rdf:type owl:Class ;
+         rdfs:subClassOf :Etat .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#OuvrirFenetre
+:OuvrirFenetre rdf:type owl:Class ;
+               rdfs:subClassOf :Intention ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :aPourBeneficeAdditionnel ;
+                                 owl:someValuesFrom :AugmentationLuminositeNaturelle
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :aPourBeneficeAdditionnel ;
+                                 owl:someValuesFrom :ReductionHumidite
+                               ] ;
+               rdfs:comment "Intention d'ouvrir une fenetre." ;
+               rdfs:label "Ouvrir Fenetre" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Piece
+:Piece rdf:type owl:Class ;
+       rdfs:subClassOf :Espace ;
+       rdfs:comment "Espace clos a l'interieur d'un batiment, comme un bureau ou une salle." ;
+       rdfs:label "Piece" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#Bureau
+:Bureau rdf:type owl:Class ;
+        rdfs:subClassOf :Piece ;
+        rdfs:comment "Type specifique de piece : un bureau de travail." ;
+        rdfs:label "Bureau" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#SalleDeReunion
+:SalleDeReunion rdf:type owl:Class ;
+                rdfs:subClassOf :Piece ;
+                rdfs:comment "Type specifique de piece : une salle de reunion." ;
+                rdfs:label "Salle de Reunion" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#PieceInoccupee
+:PieceInoccupee rdf:type owl:Class ;
+                rdfs:subClassOf :Besoin ;
+                rdfs:comment "Indique qu'une piece est inoccupee pendant une periode." ;
+                rdfs:label "Piece Inoccupee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Radiateur
+:Radiateur rdf:type owl:Class ;
+           rdfs:subClassOf :Actionneur ;
+           rdfs:comment "Un radiateur utilise pour le chauffage." ;
+           rdfs:label "Radiateur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#ReductionHumidite
+:ReductionHumidite rdf:type owl:Class ;
+                   rdfs:subClassOf :BeneficeAdditionnel ;
+                   rdfs:label "Reduction de l'Humidite" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Resolution
+:Resolution rdf:type owl:Class ;
+            rdfs:comment "Une decision finale prise par un agent pour resoudre un probleme ou un debat." ;
+            rdfs:label "Resolution" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Simulation
+:Simulation rdf:type owl:Class ;
+            rdfs:comment "Une requete de simulation pour evaluer un scenario, avec ses parametres d'entree." ;
+            rdfs:label "Simulation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#SimulationResult
+:SimulationResult rdf:type owl:Class ;
+                  rdfs:comment "L'ensemble des predictions retournees par une simulation." ;
+                  rdfs:label "Resultat de Simulation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Temperature
+:Temperature rdf:type owl:Class ;
+             rdfs:subClassOf :Capteur ;
+             rdfs:comment "Capteur de temperature." ;
+             rdfs:label "Temperature" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#UniteDeMesure
+:UniteDeMesure rdf:type owl:Class ;
+               rdfs:comment "Une unite de mesure standard (ex: Celsius, PPM)." ;
+               rdfs:label "Unite de Mesure" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Ventilation
+:Ventilation rdf:type owl:Class ;
+             rdfs:subClassOf :Actionneur ;
+             rdfs:comment "Systeme de ventilation." ;
+             rdfs:label "Ventilation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Volet
+:Volet rdf:type owl:Class ;
+       rdfs:subClassOf :Actionneur ;
+       rdfs:comment "Un volet ou un store pouvant etre ouvert ou ferme pour contrôler la lumiere et l'apport solaire." ;
+       rdfs:label "Volet" .
+
+
+# http://monbatiment.com/ontologie/SMA4SB#StatutIntention
+:StatutIntention rdf:type owl:Class ;
+                 rdfs:comment "Represente un etat dans le cycle de vie d'une intention." ;
+                 rdfs:label "Statut d'Intention" .
+
+
+### http://monbatiment.com/ontologie/SMA4SB#EconomieEnergieChauffage
+:EconomieEnergieChauffage rdf:type owl:Class ;
+    rdfs:subClassOf :BeneficeAdditionnel ;
+    rdfs:label "economie d'energie (Chauffage)" .
+
+### http://monbatiment.com/ontologie/SMA4SB#VentilateurPlafond
+:VentilateurPlafond rdf:type owl:Class ;
+    rdfs:subClassOf :Actionneur ;
+    rdfs:label "Ventilateur de Plafond" .
+
+### http://monbatiment.com/ontologie/SMA4SB#FermerVolet
+:FermerVolet rdf:type owl:Class ;
+    rdfs:subClassOf :Intention ;
+    rdfs:label "Fermer Volet" .
+
+### http://monbatiment.com/ontologie/SMA4SB#ActiverVentilateurPlafond
+:ActiverVentilateurPlafond rdf:type owl:Class ;
+    rdfs:subClassOf :Intention ;
+    rdfs:label "Activer Ventilateur de Plafond" .
+
+### http://monbatiment.com/ontologie/SMA4SB#ActiverClimatiseur
+:ActiverClimatiseur rdf:type owl:Class ;
+    rdfs:subClassOf :Intention ;
+    rdfs:label "Activer Climatiseur" .
+
+### http://monbatiment.com/ontologie/SMA4SB#OuvrirVolet
+:OuvrirVolet rdf:type owl:Class ;
+    rdfs:subClassOf :Intention ;
+    rdfs:label "Ouvrir Volet" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#Climatiseur
+:Climatiseur rdf:type owl:Class ;
+             rdfs:subClassOf :Actionneur ;
+             rdfs:comment "Un systeme de climatisation pour le rafraichissement." ;
+             rdfs:label "Climatiseur" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#ContreProposition
+:ContreProposition rdf:type owl:Class ;
+                   rdfs:subClassOf :Intention ;
+                   rdfs:comment "Une intention alternative proposee dans le cadre d'une objection." ;
+                   rdfs:label "Contre-Proposition" .
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://monbatiment.com/ontologie/SMA4SB#Actif
+:Actif rdf:type owl:NamedIndividual ,
+                :Actif .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentExecution1
+:AgentExecution1  rdf:type owl:NamedIndividual ,
+                           :AgentExecution ;
+                  :interagitDans :Bureau1 ,
+                                 :SalleReunion1 ;
+                  :nomAgent "Agent Actionneur" ;
+                  :typeAgent "Actionneur" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentCalendrier1
+:AgentCalendrier1 rdf:type owl:NamedIndividual ,
+                          :AgentCalendrier ;
+                 :nomAgent "Agent Calendrier Principal" ;
+                 :typeAgent "Planning Proactif" .
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentConfort1
+:AgentConfort1 rdf:type owl:NamedIndividual ,
+                        :AgentConfort ;
+               :interagitDans :Bureau1 ,
+                              :SalleReunion1 ;
+               :nomAgent "Agent Confort" ;
+               :typeAgent "Confort" .
+
+
+:AgentMediateur1 rdf:type owl:NamedIndividual ,
+                         :AgentMediateur ;
+                :interagitDans :Bureau1 ,
+                              :SalleReunion1 ;
+                :nomAgent "Agent Mediateur" ;
+                :typeAgent "Mediation" .
+
+:AgentStratege1 rdf:type owl:NamedIndividual ,
+                        :AgentStratege ;
+               :interagitDans :Bureau1 ,
+                              :SalleReunion1 ;
+               :nomAgent "Agent Stratege" ;
+               :typeAgent "Strategie" .
+
+:AgentPlanificateur1 rdf:type owl:NamedIndividual ,
+                           :AgentPlanificateur ;
+                  :interagitDans :Bureau1 ,
+                              :SalleReunion1 ;
+                  :nomAgent "Agent Planificateur" ;
+                  :typeAgent "Planification" .
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentPerception1
+:AgentPerception1 rdf:type owl:NamedIndividual ,
+                        :AgentPerception ;
+                  :interagitDans :Bureau1 ;
+                  :nomAgent "Agent Donnees Principal" ;
+                  :typeAgent "Donnees" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentEcoEnergie1
+:AgentEcoEnergie1 rdf:type owl:NamedIndividual ,
+                           :AgentEcoEnergie ;
+                  :interagitDans :Bureau1 ,
+                                 :SalleReunion1 ;
+                  :nomAgent "Agent Eco-energie" ;
+                  :typeAgent "energie" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentQualiteAir1
+:AgentQualiteAir1 rdf:type owl:NamedIndividual ,
+                           :AgentQualiteAir ;
+                  :interagitDans :Bureau1 ,
+                                 :SalleReunion1 ;
+                  :nomAgent "Agent Qualite Air" ;
+                  :typeAgent "Qualite Air" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#AgentSimulation1
+:AgentSimulation1 rdf:type owl:NamedIndividual ,
+                           :AgentSimulation ;
+                  :interagitDans :BatimentPrincipal ;
+                  :nomAgent "Agent Simulation" ;
+                  :typeAgent "Simulation" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Allume
+:Allume rdf:type owl:NamedIndividual ,
+                 :Allume .
+
+
+
+### http://monbatiment.com/ontologie/SMA4SB#ArriveeJeanLundiMatin
+:ArriveeJeanLundiMatin rdf:type owl:NamedIndividual ,
+                               :EvenementCalendrier ;
+                      :viseZone :Bureau1 ;
+                      :concerneOccupant :OccupantJean ;
+                      :heureDebut "2025-09-18T15:00:00Z"^^xsd:dateTime .
+
+
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#BatimentPrincipal
+:BatimentPrincipal rdf:type owl:NamedIndividual ;
+                   :contientEtage :Etage1 ,
+                                  :EtageRDC ;
+                   :nomZone "Batiment Principal" ;
+                   :volume 10000.0 .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Bureau1
+:Bureau1 rdf:type owl:NamedIndividual , 
+                    :Bureau ;
+         :contientEquipement :CapteurCO2Bureau1 ,
+                             :CapteurHumiditeBureau1 ,
+                             :CapteurLuminositeBureau1 ,
+                             :CapteurOccupationBureau1 ,
+                             :CapteurTempBureau1 ,
+                             :FenetreBureau1 ,
+                             :LampeBureau1 ,
+                             :RadiateurBureau1 ,
+                             :VentilationBureau1 ,
+                             :VoletBureau1 ;
+                             
+         :capaciteThermique 100000.0 ;
+         :estOccupee "true"^^xsd:boolean ;
+         :gainSolaireMax 400.0 ;
+         :nomZone "Bureau 1" ;
+         :resistanceThermiqueMurs 0.1 ;
+         :volume 30.0 ;
+         :capaciteThermiqueMurs 5000000.0 ; # Nouvelle propriete pour l'INERTIE des murs (valeur elevee)
+         :surfaceVitree 3.5 ;              # Nouvelle propriete (en m²)
+         :facteurSolaire 0.6 .              # Nouvelle propriete (sans unite)
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurCO2Bureau1
+:CapteurCO2Bureau1 rdf:type owl:NamedIndividual ,
+                            :CO2 ;
+                   :aPourCO2Actuel :MesureCO2_Bureau1_Initiale .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurHumiditeBureau1
+:CapteurHumiditeBureau1 rdf:type owl:NamedIndividual ,
+                                 :Humidite ;
+                        :aPourHumiditeActuelle :MesureHumidite_Bureau1_Initiale .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurLuminositeBureau1
+:CapteurLuminositeBureau1 rdf:type owl:NamedIndividual ,
+                                   :Luminosite ;
+                          :aPourLuminositeActuelle :MesureLuminosite_Bureau1_Initiale .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurOccupationBureau1
+:CapteurOccupationBureau1 rdf:type owl:NamedIndividual ,
+                                   :Occupation .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurTempBureau1
+:CapteurTempBureau1 rdf:type owl:NamedIndividual ,
+                             :Temperature ;
+                    :aPourTemperatureActuelle :MesureTemperature_Bureau1_Initiale .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurTemperatureExterieur
+:CapteurTemperatureExterieur rdf:type owl:NamedIndividual , 
+                                        :Temperature .
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurHumiditeExterieur
+:CapteurHumiditeExterieur rdf:type owl:NamedIndividual , 
+                                    :Humidite .
+
+###  http://monbatiment.com/ontologie/SMA4SB#CapteurLuminositeExterieur
+:CapteurLuminositeExterieur rdf:type owl:NamedIndividual , 
+                                    :Luminosite .
+
+###  http://monbatiment.com/ontologie/SMA4SB#Celsius
+:Celsius rdf:type owl:NamedIndividual ,
+                  :UniteDeMesure .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Etage1
+:Etage1 rdf:type owl:NamedIndividual ,
+                 :Etage ;
+        :contientPiece :Bureau1 ;
+        :nomZone "Premier etage" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#EtageRDC
+:EtageRDC rdf:type owl:NamedIndividual ,
+                   :Etage ;
+          :contientPiece :SalleReunion1 ;
+          :nomZone "Rez-de-Chaussee" .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Eteint
+:Eteint rdf:type owl:NamedIndividual ,
+                 :Eteint .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#FenetreBureau1
+:FenetreBureau1 rdf:type owl:NamedIndividual ,
+                         :Fenetre ;
+                :aPourEtat :Fermee .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Fermee
+:Fermee rdf:type owl:NamedIndividual ,
+                 :Fermee .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Inactif
+:Inactif rdf:type owl:NamedIndividual ,
+                  :Inactif .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#LampeBureau1
+:LampeBureau1 rdf:type owl:NamedIndividual ,
+                       :Lampe ;
+              :aPourEtat :Actif .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Lux
+:Lux rdf:type owl:NamedIndividual ,
+              :UniteDeMesure .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureCO2_Bureau1_Initiale
+:MesureCO2_Bureau1_Initiale rdf:type owl:NamedIndividual ,
+                                     :MesureCO2 ;
+                            :aPourUnite :PPM ;
+                            :aPourValeur 750.0 ;
+                            :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureHumidite_Bureau1_Initiale
+:MesureHumidite_Bureau1_Initiale rdf:type owl:NamedIndividual ,
+                                          :MesureHumidite ;
+                                 :aPourUnite :Pourcentage ;
+                                 :aPourValeur 55.0 ;
+                                 :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureLuminosite_Bureau1_Initiale
+:MesureLuminosite_Bureau1_Initiale rdf:type owl:NamedIndividual ,
+                                            :MesureLuminosite ;
+                                   :aPourUnite :Lux ;
+                                   :aPourValeur 520.0 ;
+                                   :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureOccupation_Bureau1_20250723_1530
+:MesureOccupation_Bureau1_20250723_1530 rdf:type owl:NamedIndividual ;
+                                        :aPourValeur 1 ;
+                                        :estOccupee "true"^^xsd:boolean ;
+                                        :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#MesureTemperature_Bureau1_Initiale
+:MesureTemperature_Bureau1_Initiale rdf:type owl:NamedIndividual ,
+                                             :MesureTemperature ;
+                                    :aPourUnite :Celsius ;
+                                    :aPourValeur 17.0 ;
+                                    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#OccupantJean
+:OccupantJean rdf:type owl:NamedIndividual ,
+                       :Occupant ;
+              :occupe :Bureau1 ;
+              :preferenceCO2 800.0 ;
+              :preferenceLuminosite 500.0 ;
+              :preferenceTemperature 21.0 .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Ouverte
+:Ouverte rdf:type owl:NamedIndividual ,
+                  :Ouverte .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#PPM
+:PPM rdf:type owl:NamedIndividual ,
+              :UniteDeMesure .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#Pourcentage
+:Pourcentage rdf:type owl:NamedIndividual ,
+                      :UniteDeMesure .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#RadiateurBureau1
+:RadiateurBureau1 rdf:type owl:NamedIndividual ,
+                           :Radiateur ;
+                  :aPourEtat :Inactif .
+
+###  http://monbatiment.com/ontologie/SMA4SB#ClimatiseurBureau1
+:ClimatiseurBureau1 rdf:type owl:NamedIndividual ,
+                           :Climatiseur ;
+                  :aPourEtat :Inactif .
+
+###  http://monbatiment.com/ontologie/SMA4SB#SalleReunion1
+:SalleReunion1 rdf:type owl:NamedIndividual ;
+               :nomZone "Salle de Reunion 1" ;
+               :volume 50.0 .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#VentilationBureau1
+:VentilationBureau1 rdf:type owl:NamedIndividual ,
+                             :Ventilation .
+
+
+###  http://monbatiment.com/ontologie/SMA4SB#VoletBureau1
+:VoletBureau1 rdf:type owl:NamedIndividual ,
+                       :Volet .
+
+
+# http://monbatiment.com/ontologie/SMA4SB#Statut_Proposee
+:Statut_Proposee rdf:type owl:NamedIndividual ,
+                         :StatutIntention ;
+                rdfs:label "Proposee" .
+
+# http://monbatiment.com/ontologie/SMA4SB#Statut_Contestee
+:Statut_Contestee rdf:type owl:NamedIndividual ,
+                          :StatutIntention ;
+                 rdfs:label "Contestee" .
+
+# http://monbatiment.com/ontologie/SMA4SB#Statut_Validee
+:Statut_Validee rdf:type owl:NamedIndividual ,
+                        :StatutIntention ;
+               rdfs:label "Validee" .
+
+# http://monbatiment.com/ontologie/SMA4SB#Statut_Optimisee
+:Statut_Optimisee rdf:type owl:NamedIndividual ,
+                          :StatutIntention ;
+                 rdfs:label "Optimisee" .
+
+# http://monbatiment.com/ontologie/SMA4SB#Statut_Planifiee
+:Statut_Planifiee rdf:type owl:NamedIndividual ,
+                          :StatutIntention ;
+                 rdfs:label "Planifiee" .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:Actif rdfs:comment "L'equipement est actif." ;
+       rdfs:label "Actif" .
+
+
+:Allume rdfs:comment "L'eclairage est allume." ;
+        rdfs:label "Allume" .
+
+
+:Eteint rdfs:comment "L'eclairage est eteint." ;
+        rdfs:label "eteint" .
+
+
+:Fermee rdfs:comment "La fenetre est fermee." ;
+        rdfs:label "Fermee" .
+
+
+:Inactif rdfs:comment "L'equipement est inactif." ;
+         rdfs:label "Inactif" .
+
+
+:Ouverte rdfs:comment "La fenetre est ouverte." ;
+         rdfs:label "Ouverte" .
+
+
+:interagitDans rdfs:comment "L'agent interagit ou opere dans cette zone physique." ;
+               rdfs:label "interagit dans" .
+
+
+:viseZone rdfs:comment "L'intention/conflit/resolution/simulation concerne cette zone physique." ;
+          rdfs:label "vise zone" .
+
+
+
+#################################################################
+#    Rules
+#################################################################
+
+# Declaration des nouvelles variables pour les regles
+:p rdf:type swrl:Variable .
+:m rdf:type swrl:Variable .
+:val rdf:type swrl:Variable .
+:l rdf:type swrl:Variable .
+:e rdf:type swrl:Variable .
+:s1 rdf:type swrl:Variable .
+:s2 rdf:type swrl:Variable .
+
+[   rdfs:label "S1" ;
+    rdfs:comment "Si la temperature est inferieure a 19°C, un besoin de chauffage est deduit." ;
+    rdf:type swrl:Imp ;
+    swrl:body
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ClassAtom ;
+            swrl:classPredicate :Piece ;
+            swrl:argument1 :p
+        ] ;
+        rdf:rest
+        [   rdf:type swrl:AtomList ;
+            rdf:first
+            [   rdf:type swrl:ObjectPropertyAtom ;
+                swrl:propertyPredicate :aPourTemperatureActuelle ;
+                swrl:argument1 :p ;
+                swrl:argument2 :m
+            ] ;
+            rdf:rest
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:DatavaluedPropertyAtom ;
+                    swrl:propertyPredicate :aPourValeur ;
+                    swrl:argument1 :m ;
+                    swrl:argument2 :val
+                ] ;
+                rdf:rest
+                [   rdf:type swrl:AtomList ;
+                    rdf:first
+                    [   rdf:type swrl:BuiltinAtom ;
+                        swrl:builtin swrlb:lessThan ;
+                        swrl:arguments (:val "19.0"^^xsd:decimal)
+                    ] ;
+                    rdf:rest rdf:nil
+                ]
+            ]
+        ]
+    ] ;
+    swrl:head
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourBesoin ;
+            swrl:argument1 :p ;
+            swrl:argument2
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ClassAtom ;
+                    swrl:classPredicate :BesoinChauffage ;
+                    swrl:argument1 _:b
+                ] ;
+                rdf:rest rdf:nil
+            ]
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
+
+[   rdfs:label "S2" ;
+    rdfs:comment "Si le CO2 depasse 1000 ppm, un besoin de ventilation est deduit." ;
+    rdf:type swrl:Imp ;
+    swrl:body
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ClassAtom ;
+            swrl:classPredicate :Piece ;
+            swrl:argument1 :p
+        ] ;
+        rdf:rest
+        [   rdf:type swrl:AtomList ;
+            rdf:first
+            [   rdf:type swrl:ObjectPropertyAtom ;
+                swrl:propertyPredicate :aPourCO2Actuel ;
+                swrl:argument1 :p ;
+                swrl:argument2 :m
+            ] ;
+            rdf:rest
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:DatavaluedPropertyAtom ;
+                    swrl:propertyPredicate :aPourValeur ;
+                    swrl:argument1 :m ;
+                    swrl:argument2 :val
+                ] ;
+                rdf:rest
+                [   rdf:type swrl:AtomList ;
+                    rdf:first
+                    [   rdf:type swrl:BuiltinAtom ;
+                        swrl:builtin swrlb:greaterThan ;
+                        swrl:arguments (:val "1000.0"^^xsd:decimal)
+                    ] ;
+                    rdf:rest rdf:nil
+                ]
+            ]
+        ]
+    ] ;
+    swrl:head
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourBesoin ;
+            swrl:argument1 :p ;
+            swrl:argument2
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ClassAtom ;
+                    swrl:classPredicate :BesoinVentilation ;
+                    swrl:argument1 _:b
+                ] ;
+                rdf:rest rdf:nil
+            ]
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
+
+[   rdfs:label "S3" ;
+    rdfs:comment "Deux intentions visant le meme equipement avec des etats finaux differents sont en conflit." ;
+    rdf:type swrl:Imp ;
+    swrl:body
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourCibleEquipement ;
+            swrl:argument1 :i1 ;
+            swrl:argument2 :e
+        ] ;
+        rdf:rest
+        [   rdf:type swrl:AtomList ;
+            rdf:first
+            [   rdf:type swrl:ObjectPropertyAtom ;
+                swrl:propertyPredicate :aPourCibleEquipement ;
+                swrl:argument1 :i2 ;
+                swrl:argument2 :e
+            ] ;
+            rdf:rest
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ObjectPropertyAtom ;
+                    swrl:propertyPredicate :proposeEtatActionneur ;
+                    swrl:argument1 :i1 ;
+                    swrl:argument2 :s1
+                ] ;
+                rdf:rest
+                [   rdf:type swrl:AtomList ;
+                    rdf:first
+                    [   rdf:type swrl:ObjectPropertyAtom ;
+                        swrl:propertyPredicate :proposeEtatActionneur ;
+                        swrl:argument1 :i2 ;
+                        swrl:argument2 :s2
+                    ] ;
+                    rdf:rest
+                    [   rdf:type swrl:AtomList ;
+                        rdf:first
+                        [   rdf:type swrl:BuiltinAtom ;
+                            swrl:builtin swrlb:notEqual ;
+                            swrl:arguments (:i1 :i2)
+                        ] ;
+                        rdf:rest
+                        [   rdf:type swrl:AtomList ;
+                            rdf:first
+                            [   rdf:type swrl:BuiltinAtom ;
+                                swrl:builtin swrlb:notEqual ;
+                                swrl:arguments (:s1 :s2)
+                            ] ;
+                            rdf:rest rdf:nil
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ] ;
+    swrl:head
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :estEnConflitAvec ;
+            swrl:argument1 :i1 ;
+            swrl:argument2 :i2
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
+
+[   rdfs:label "S4" ;
+    rdfs:comment "Si une piece est inoccupee et une lampe est allumee, un besoin d'economie d'energie est deduit." ;
+    rdf:type swrl:Imp ;
+    swrl:body
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate :estOccupee ;
+            swrl:argument1 :p ;
+            swrl:argument2 "false"^^xsd:boolean
+        ] ;
+        rdf:rest
+        [   rdf:type swrl:AtomList ;
+            rdf:first
+            [   rdf:type swrl:ObjectPropertyAtom ;
+                swrl:propertyPredicate :contientEquipement ;
+                swrl:argument1 :p ;
+                swrl:argument2 :l
+            ] ;
+            rdf:rest
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ClassAtom ;
+                    swrl:classPredicate :Lampe ;
+                    swrl:argument1 :l
+                ] ;
+                rdf:rest
+                [   rdf:type swrl:AtomList ;
+                    rdf:first
+                    [   rdf:type swrl:ObjectPropertyAtom ;
+                        swrl:propertyPredicate :aPourEtat ;
+                        swrl:argument1 :l ;
+                        swrl:argument2 :Allume
+                    ] ;
+                    rdf:rest rdf:nil
+                ]
+            ]
+        ]
+    ] ;
+    swrl:head
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourBesoin ;
+            swrl:argument1 :p ;
+            swrl:argument2
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ClassAtom ;
+                    swrl:classPredicate :BesoinEconomieEnergie ;
+                    swrl:argument1 _:b
+                ] ;
+                rdf:rest rdf:nil
+            ]
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
+
+[   rdfs:label "S5" ;
+    rdfs:comment "Si la luminosite est superieure a 1200 Lux et une lampe est allumee, un besoin de reduction de luminosite est deduit." ;
+    rdf:type swrl:Imp ;
+    swrl:body
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourLuminositeActuelle ;
+            swrl:argument1 :p ;
+            swrl:argument2 :m
+        ] ;
+        rdf:rest
+        [   rdf:type swrl:AtomList ;
+            rdf:first
+            [   rdf:type swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate :aPourValeur ;
+                swrl:argument1 :m ;
+                swrl:argument2 :val
+            ] ;
+            rdf:rest
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:BuiltinAtom ;
+                    swrl:builtin swrlb:greaterThan ;
+                    swrl:arguments (:val "1200.0"^^xsd:decimal)
+                ] ;
+                rdf:rest
+                [   rdf:type swrl:AtomList ;
+                    rdf:first
+                    [   rdf:type swrl:ObjectPropertyAtom ;
+                        swrl:propertyPredicate :contientEquipement ;
+                        swrl:argument1 :p ;
+                        swrl:argument2 :l
+                    ] ;
+                    rdf:rest
+                    [   rdf:type swrl:AtomList ;
+                        rdf:first
+                        [   rdf:type swrl:ClassAtom ;
+                            swrl:classPredicate :Lampe ;
+                            swrl:argument1 :l
+                        ] ;
+                        rdf:rest
+                        [   rdf:type swrl:AtomList ;
+                            rdf:first
+                            [   rdf:type swrl:ObjectPropertyAtom ;
+                                swrl:propertyPredicate :aPourEtat ;
+                                swrl:argument1 :l ;
+                                swrl:argument2 :Allume
+                            ] ;
+                            rdf:rest rdf:nil
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ] ;
+    swrl:head
+    [   rdf:type swrl:AtomList ;
+        rdf:first
+        [   rdf:type swrl:ObjectPropertyAtom ;
+            swrl:propertyPredicate :aPourBesoin ;
+            swrl:argument1 :p ;
+            swrl:argument2
+            [   rdf:type swrl:AtomList ;
+                rdf:first
+                [   rdf:type swrl:ClassAtom ;
+                    swrl:classPredicate :BesoinReductionLuminosite ;
+                    swrl:argument1 _:b
+                ] ;
+                rdf:rest rdf:nil
+            ]
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

@@ -1,0 +1,6 @@
+rdflib
+openai
+python-dotenv
+json
+asyncio
+requests
