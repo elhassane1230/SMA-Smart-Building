@@ -1,0 +1,1457 @@
+@prefix : <http://monbatiment.com/ontologie/SMA4SB#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://monbatiment.com/ontologie/SMA4SB> a owl:Ontology .
+
+:ActionLog_20250922152350099983 a :ActionExecutee ;
+    :concerneEquipement :FenetreBureau1 ;
+    :creeLe "2025-09-22T15:23:50.100060"^^xsd:dateTime ;
+    :description "Ouvrir la fenêtre pour un rafraîchissement naturel et gratuit."^^xsd:string ;
+    :genereParAgent :AgentExecution1 ;
+    :viseZone :Bureau1 .
+
+:ActionLog_20250922152403651262 a :ActionExecutee ;
+    :concerneEquipement :FenetreBureau1 ;
+    :creeLe "2025-09-22T15:24:03.651369"^^xsd:dateTime ;
+    :description "Ouvrir la fenêtre permet de ventiler l'espace et de réduire la température intérieure, ce qui répond aux besoins de ventilation et de rafraîchissement. La température extérieure (19.0°C) étant inférieure à la température intérieure (24.0°C), cette action est valide et efficace."^^xsd:string ;
+    :genereParAgent :AgentExecution1 ;
+    :viseZone :Bureau1 .
+
+:ActionLog_20250922152414255872 a :ActionExecutee ;
+    :concerneEquipement :FenetreBureau1 ;
+    :creeLe "2025-09-22T15:24:14.255960"^^xsd:dateTime ;
+    :description "Ouvrir la fenêtre permet de ventiler l'espace et de rafraîchir l'air intérieur, ce qui répond aux besoins de ventilation et de rafraîchissement. La température extérieure (10.0°C) étant inférieure à la température intérieure (17.0°C), cette action est valide et efficace."^^xsd:string ;
+    :genereParAgent :AgentExecution1 ;
+    :viseZone :Bureau1 .
+
+:ActiverChauffage a owl:Class ;
+    rdfs:label "Activer Chauffage" ;
+    rdfs:comment "Intention d'activer le chauffage." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :ReductionHumidite ],
+        :Intention .
+
+:ActiverClimatiseur a owl:Class ;
+    rdfs:label "Activer Climatiseur" ;
+    rdfs:subClassOf :Intention .
+
+:ActiverVentilateurPlafond a owl:Class ;
+    rdfs:label "Activer Ventilateur de Plafond" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :EconomieEnergieChauffage ],
+        :Intention .
+
+:ActiverVentilation a owl:Class ;
+    rdfs:label "Activer Ventilation" ;
+    rdfs:comment "Intention d'activer la ventilation." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :ReductionHumidite ],
+        [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :ReductionHumidite ],
+        :Intention .
+
+:AgentCalendrier1 a :AgentCalendrier,
+        owl:NamedIndividual ;
+    :nomAgent "Agent Calendrier Principal" ;
+    :typeAgent "Planning Proactif" .
+
+:AgentEcoEnergie1 a :AgentEcoEnergie,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Eco-energie" ;
+    :typeAgent "energie" .
+
+:AgentPerception1 a :AgentPerception,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1 ;
+    :nomAgent "Agent Donnees Principal" ;
+    :typeAgent "Donnees" .
+
+:AgentPlanificateur1 a :AgentPlanificateur,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Planificateur" ;
+    :typeAgent "Planification" .
+
+:AgentQualiteAir1 a :AgentQualiteAir,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Qualite Air" ;
+    :typeAgent "Qualite Air" .
+
+:AgentSimulation1 a :AgentSimulation,
+        owl:NamedIndividual ;
+    :interagitDans :BatimentPrincipal ;
+    :nomAgent "Agent Simulation" ;
+    :typeAgent "Simulation" .
+
+:AgentStratege1 a :AgentStratege,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Stratege" ;
+    :typeAgent "Strategie" .
+
+:AllumerEclairage a owl:Class ;
+    rdfs:label "Allumer eclairage" ;
+    rdfs:comment "Intention d'allumer l'eclairage." ;
+    rdfs:subClassOf :Intention .
+
+:ArriveeJeanLundiMatin a :EvenementCalendrier,
+        owl:NamedIndividual ;
+    :concerneOccupant :OccupantJean ;
+    :heureDebut "2025-09-18T15:00:00+00:00"^^xsd:dateTime ;
+    :viseZone :Bureau1 .
+
+:BesoinLuminosite a owl:Class ;
+    rdfs:label "Besoin Luminosite" ;
+    rdfs:comment "Indique qu'une piece a un besoin de luminosite (luminosite trop faible)." ;
+    rdfs:subClassOf :Besoin .
+
+:CapteurHumiditeExterieur a :Humidite,
+        owl:NamedIndividual .
+
+:CapteurLuminositeExterieur a :Luminosite,
+        owl:NamedIndividual ;
+    :aPourLuminositeActuelle :MesureLuminositeExt_20250922132347961958,
+        :MesureLuminositeExt_20250922132357743418,
+        :MesureLuminositeExt_20250922132411329911 .
+
+:CapteurTemperatureExterieur a :Temperature,
+        owl:NamedIndividual ;
+    :aPourTemperatureActuelle :MesureTempExt_20250922132347961958,
+        :MesureTempExt_20250922132357743418,
+        :MesureTempExt_20250922132411329911 .
+
+:ClimatiseurBureau1 a :Climatiseur,
+        owl:NamedIndividual ;
+    :aPourEtat :Inactif .
+
+:ConflitResolu_20250922152350085120 a :ConflitResolu ;
+    :aResoluIntention :Intention_20250922152348236725 ;
+    :concerneConflit :Conflit_20250922152350085090 ;
+    :creeLe "2025-09-22T15:23:50.085186"^^xsd:dateTime ;
+    :description "Contre-proposition retenue (plus économe)."^^xsd:string ;
+    :genereParAgent :AgentMediateur1 ;
+    :intentionValidee :Intention_20250922152348330442 ;
+    :viseZone :Bureau1 .
+
+:DesactiverChauffage a owl:Class ;
+    rdfs:label "Desactiver Chauffage" ;
+    rdfs:comment "Intention de desactiver le chauffage." ;
+    rdfs:subClassOf :Intention .
+
+:DesactiverVentilation a owl:Class ;
+    rdfs:label "Desactiver Ventilation" ;
+    rdfs:comment "Intention de desactiver la ventilation." ;
+    rdfs:subClassOf :Intention .
+
+:EconomieEnergieEclairage a owl:Class ;
+    rdfs:label "economie d'energie (eclairage)" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:EteindreEclairage a owl:Class ;
+    rdfs:label "eteindre eclairage" ;
+    rdfs:comment "Intention d'eteindre l'eclairage." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :AmeliorationBienEtre ],
+        :Intention .
+
+:FermerFenetre a owl:Class ;
+    rdfs:label "Fermer Fenetre" ;
+    rdfs:comment "Intention de fermer une fenetre." ;
+    rdfs:subClassOf :Intention .
+
+:FermerVolet a owl:Class ;
+    rdfs:label "Fermer Volet" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :EconomieEnergieRafraichissement ],
+        :Intention .
+
+:Humidificateur a owl:Class ;
+    rdfs:label "Humidificateur" ;
+    rdfs:comment "Un dispositif pour augmenter l'humidite de l'air." ;
+    rdfs:subClassOf :Actionneur .
+
+:MesureOccupation_Bureau1_20250723_1530 a owl:NamedIndividual ;
+    :aPourValeur 1 ;
+    :estOccupee true ;
+    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+:OuvrirFenetre a owl:Class ;
+    rdfs:label "Ouvrir Fenetre" ;
+    rdfs:comment "Intention d'ouvrir une fenetre." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :AugmentationLuminositeNaturelle ],
+        [ a owl:Restriction ;
+            owl:onProperty :aPourBeneficeAdditionnel ;
+            owl:someValuesFrom :ReductionHumidite ],
+        :Intention .
+
+:OuvrirVolet a owl:Class ;
+    rdfs:label "Ouvrir Volet" ;
+    rdfs:subClassOf :Intention .
+
+:PieceInoccupee a owl:Class ;
+    rdfs:label "Piece Inoccupee" ;
+    rdfs:comment "Indique qu'une piece est inoccupee pendant une periode." ;
+    rdfs:subClassOf :Besoin .
+
+:SalleDeReunion a owl:Class ;
+    rdfs:label "Salle de Reunion" ;
+    rdfs:comment "Type specifique de piece : une salle de reunion." ;
+    rdfs:subClassOf :Piece .
+
+:Statut_Contestee a :StatutIntention,
+        owl:NamedIndividual ;
+    rdfs:label "Contestee" .
+
+:Statut_Optimisee a :StatutIntention,
+        owl:NamedIndividual ;
+    rdfs:label "Optimisee" .
+
+:Statut_Planifiee a :StatutIntention,
+        owl:NamedIndividual ;
+    rdfs:label "Planifiee" .
+
+:Statut_Proposee a :StatutIntention,
+        owl:NamedIndividual ;
+    rdfs:label "Proposee" .
+
+:Statut_Validee a :StatutIntention,
+        owl:NamedIndividual ;
+    rdfs:label "Validee" .
+
+:VentilateurPlafond a owl:Class ;
+    rdfs:label "Ventilateur de Plafond" ;
+    rdfs:subClassOf :Actionneur .
+
+:Zone a owl:Class ;
+    rdfs:label "Zone" ;
+    rdfs:comment "Une zone ou un regroupement arbitraire d'espaces." ;
+    rdfs:subClassOf :Espace .
+
+:aPourHumiditeActuelle a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour humidite actuelle" ;
+    rdfs:comment "La mesure d'humidite actuelle pour cette piece." ;
+    rdfs:domain :Piece .
+
+:aPourOccupationActuelle a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour occupation actuelle" ;
+    rdfs:comment "La mesure d'occupation actuelle pour cette piece." ;
+    rdfs:domain :Piece .
+
+:aPourStatut a owl:ObjectProperty ;
+    rdfs:label "a pour statut" ;
+    rdfs:comment "Definit l'etat actuel d'une intention dans le processus de decision decentralise." ;
+    rdfs:domain :Intention ;
+    rdfs:range :StatutIntention .
+
+:aPourTemperatureExterieure a owl:DatatypeProperty ;
+    rdfs:label "a pour temperature exterieure" ;
+    rdfs:comment "La derniere mesure de temperature exterieure connue pour le batiment." ;
+    rdfs:range xsd:decimal .
+
+:aPourUnite a owl:ObjectProperty ;
+    rdfs:label "a pour unite" ;
+    rdfs:comment "Relie une mesure a son unite de mesure standardisee." ;
+    rdfs:domain :Mesure ;
+    rdfs:range :UniteDeMesure .
+
+:aPublieIntention a owl:ObjectProperty ;
+    rdfs:label "a publie intention" ;
+    rdfs:comment "Relie un agent a une intention qu'il a publiee." ;
+    rdfs:domain :Agent ;
+    rdfs:range :Intention .
+
+:aResoluIntention a owl:ObjectProperty ;
+    rdfs:label "a resolu intention" ;
+    rdfs:comment "Relie un log de resolution a l'intention qui a ete directement affectee (supprimee ou validee)." ;
+    rdfs:range :Intention .
+
+:arbitreLeConflit a owl:ObjectProperty ;
+    rdfs:label "arbitre le conflit" ;
+    rdfs:comment "Relie une resolution au conflit ou a l'objection qu'elle arbitre." ;
+    rdfs:domain :ConflitResolu ;
+    rdfs:range :Conflit .
+
+:capaciteThermique a owl:DatatypeProperty ;
+    rdfs:label "capacite thermique" ;
+    rdfs:comment "Capacite thermique de la zone en Joules par Kelvin (J/K)." ;
+    rdfs:range xsd:decimal .
+
+:co2Final a owl:DatatypeProperty ;
+    rdfs:label "CO2 final" ;
+    rdfs:domain :SimulationResult ;
+    rdfs:range xsd:decimal .
+
+:concerneConflit a owl:ObjectProperty ;
+    rdfs:label "concerne conflit" ;
+    rdfs:comment "Relie une resolution a l'instance de conflit qu'elle resout." ;
+    rdfs:domain :ConflitResolu ;
+    rdfs:range :Conflit .
+
+:concerneEquipement a owl:ObjectProperty ;
+    rdfs:label "concerne equipement" ;
+    rdfs:comment "Relie une entite (comme une intention ou un log) a un equipement specifique." ;
+    rdfs:domain :Piece ;
+    rdfs:range :Equipement .
+
+:concerneIntention a owl:ObjectProperty ;
+    rdfs:label "concerne intention" ;
+    rdfs:comment "Relie un conflit aux intentions qui le composent." ;
+    rdfs:domain :Conflit ;
+    rdfs:range :Intention .
+
+:concerneOccupant a owl:ObjectProperty ;
+    rdfs:label "concerne l'occupant" ;
+    rdfs:comment "Relie un evenement de calendrier a l'occupant concerne." ;
+    rdfs:domain :EvenementCalendrier ;
+    rdfs:range :Occupant .
+
+:contientEtage a owl:ObjectProperty ;
+    rdfs:label "contient etage" ;
+    rdfs:comment "Le batiment contient cet etage." ;
+    rdfs:range :Etage .
+
+:contientPiece a owl:ObjectProperty ;
+    rdfs:label "contient piece" ;
+    rdfs:comment "L'etage contient cette piece." ;
+    rdfs:domain :Etage ;
+    rdfs:range :Piece .
+
+:creeLe a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "cree le" ;
+    rdfs:comment "Horodatage de la creation de l'entite." ;
+    rdfs:domain :Conflit,
+        :Etat,
+        :Intention,
+        :Mesure,
+        :Resolution,
+        :Simulation ;
+    rdfs:range xsd:dateTime .
+
+:creePar a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "cree par" ;
+    rdfs:comment "L'agent qui a cree la resolution." ;
+    rdfs:domain :Resolution ;
+    rdfs:range :Agent .
+
+:description a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "description" ;
+    rdfs:comment "Description textuelle de l'entite." ;
+    rdfs:domain :Conflit,
+        :Intention,
+        :Resolution,
+        :SimulationResult ;
+    rdfs:range xsd:string .
+
+:energieConsommee a owl:DatatypeProperty ;
+    rdfs:label "energie consommee" ;
+    rdfs:domain :SimulationResult ;
+    rdfs:range xsd:decimal .
+
+:estUneObjectionA a owl:ObjectProperty ;
+    rdfs:label "est une objection a" ;
+    rdfs:comment "Relie une objection a l'intention qu'elle conteste." ;
+    rdfs:domain :Objection ;
+    rdfs:range :Intention .
+
+:gainSolaireMax a owl:DatatypeProperty ;
+    rdfs:label "gain solaire max" ;
+    rdfs:comment "Le gain solaire maximal pour une zone en Watts (W), representant l'apport de chaleur par le soleil par temps clair." ;
+    rdfs:range xsd:decimal .
+
+:genereParAgent a owl:ObjectProperty ;
+    rdfs:label "genere par agent" ;
+    rdfs:comment "Indique quel agent a genere l'entite (intention, conflit, etc.)." ;
+    rdfs:domain owl:Thing ;
+    rdfs:range :Agent .
+
+:gravite a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "gravite" ;
+    rdfs:comment "Niveau de gravite d'un conflit (ex: 1-10)." ;
+    rdfs:domain :Conflit ;
+    rdfs:range xsd:integer .
+
+:heureDebut a owl:DatatypeProperty ;
+    rdfs:label "heure de debut" ;
+    rdfs:comment "L'heure de debut d'un evenement planifie." ;
+    rdfs:domain :EvenementCalendrier ;
+    rdfs:range xsd:dateTime .
+
+:heureFin a owl:DatatypeProperty ;
+    rdfs:label "heure de fin" ;
+    rdfs:comment "L'heure de fin d'un evenement planifie." ;
+    rdfs:domain :EvenementCalendrier ;
+    rdfs:range xsd:dateTime .
+
+:horaireResultant a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "horaire resultant" ;
+    rdfs:comment "Horaire resultant d'une resolution ou d'une simulation." ;
+    rdfs:domain :Resolution,
+        :SimulationResult ;
+    rdfs:range xsd:dateTime .
+
+:horaireSouhaite a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "horaire souhaite" ;
+    rdfs:comment "Horaire souhaite pour la realisation de l'intention." ;
+    rdfs:domain :Intention ;
+    rdfs:range xsd:dateTime .
+
+:humiditeFinale a owl:DatatypeProperty ;
+    rdfs:label "humidite finale" ;
+    rdfs:domain :SimulationResult ;
+    rdfs:range xsd:decimal .
+
+:identifiePar a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "identifie par" ;
+    rdfs:comment "L'agent qui a identifie ce conflit." ;
+    rdfs:domain :Conflit ;
+    rdfs:range :Agent .
+
+:intentionValidee a owl:ObjectProperty ;
+    rdfs:label "intention validee" ;
+    rdfs:comment "Relie une resolution a l'intention qui a ete finalement choisie ou validee." ;
+    rdfs:domain :ConflitResolu ;
+    rdfs:range :Intention .
+
+:interagitDans a owl:ObjectProperty ;
+    rdfs:label "interagit dans" ;
+    rdfs:comment "L'agent interagit ou opere dans cette zone physique.",
+        "Relie un agent a un espace physique dans lequel il opere." ;
+    rdfs:domain :Agent ;
+    rdfs:range :Espace .
+
+:nomAgent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nom agent" ;
+    rdfs:comment "Nom lisible par l'humain de l'agent." ;
+    rdfs:domain :Agent ;
+    rdfs:range xsd:string .
+
+:nomZone a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nom zone" ;
+    rdfs:comment "Nom lisible par l'humain de la zone." ;
+    rdfs:domain :Espace ;
+    rdfs:range xsd:string .
+
+:occupe a owl:ObjectProperty ;
+    rdfs:label "occupe" ;
+    rdfs:comment "L'occupant occupe cette piece (ex: son bureau principal)." ;
+    rdfs:domain :Occupant ;
+    rdfs:range :Espace .
+
+:preferenceCO2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "preference CO2" ;
+    rdfs:comment "Niveau de CO2 prefere par l'occupant." ;
+    rdfs:domain :Occupant ;
+    rdfs:range xsd:decimal .
+
+:preferenceLuminosite a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "preference luminosite" ;
+    rdfs:comment "Niveau de luminosite prefere par l'occupant." ;
+    rdfs:domain :Occupant ;
+    rdfs:range xsd:decimal .
+
+:preferenceTemperature a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "preference temperature" ;
+    rdfs:comment "Temperature preferee par l'occupant." ;
+    rdfs:domain :Occupant ;
+    rdfs:range xsd:decimal .
+
+:produitResultat a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "produit resultat" ;
+    rdfs:comment "La simulation produit ce resultat." ;
+    rdfs:domain :Simulation ;
+    rdfs:range :SimulationResult .
+
+:proposeAlternative a owl:ObjectProperty ;
+    rdfs:label "propose alternative" ;
+    rdfs:comment "Relie une objection a la contre-proposition qu'elle suggere." ;
+    rdfs:domain :Objection ;
+    rdfs:range :ContreProposition .
+
+:resistanceThermiqueMurs a owl:DatatypeProperty ;
+    rdfs:label "resistance thermique des murs" ;
+    rdfs:comment "Resistance thermique des murs en Kelvin par Watt (K/W)." ;
+    rdfs:range xsd:decimal .
+
+:scoreCompromis a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "score compromis" ;
+    rdfs:comment "Score d'evaluation du compromis atteint." ;
+    rdfs:domain :Resolution ;
+    rdfs:range xsd:decimal .
+
+:simuleIntention a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "simule intention" ;
+    rdfs:comment "La simulation vise a evaluer cette intention." ;
+    rdfs:domain :Simulation ;
+    rdfs:range :Intention .
+
+:temperatureFinale a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "temperature finale" ;
+    rdfs:comment "Temperature finale predite par la simulation." ;
+    rdfs:domain :SimulationResult ;
+    rdfs:range xsd:decimal .
+
+:temperatureResultante a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "temperature resultante" ;
+    rdfs:comment "Temperature resultante de la resolution." ;
+    rdfs:domain :Resolution ;
+    rdfs:range xsd:decimal .
+
+:tempsPourAtteindreConsigne a owl:DatatypeProperty ;
+    rdfs:label "temps pour atteindre la consigne" ;
+    rdfs:domain :SimulationResult ;
+    rdfs:range xsd:decimal .
+
+:timestamp a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "horodatage" ;
+    rdfs:comment "Horodatage de la mesure." ;
+    rdfs:domain :Mesure ;
+    rdfs:range xsd:dateTime .
+
+:typeAgent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "type agent" ;
+    rdfs:comment "Type fonctionnel de l'agent (ex: 'Confort', 'energie')." ;
+    rdfs:domain :Agent ;
+    rdfs:range xsd:string .
+
+:validePar a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "valide par" ;
+    rdfs:comment "L'agent qui a valide cette resolution." ;
+    rdfs:domain :Resolution ;
+    rdfs:range :Agent .
+
+:viseZone a owl:ObjectProperty ;
+    rdfs:label "vise zone" ;
+    rdfs:comment "L'intention ou le conflit concerne cet espace.",
+        "L'intention/conflit/resolution/simulation concerne cette zone physique." ;
+    rdfs:domain :Conflit,
+        :Intention,
+        :Resolution,
+        :Simulation ;
+    rdfs:range :Espace .
+
+:volume a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "volume" ;
+    rdfs:comment "Volume de la zone physique en metres cubes." ;
+    rdfs:domain :Espace ;
+    rdfs:range xsd:decimal .
+
+swrla:isRuleEnabled a owl:AnnotationProperty .
+
+:AgentCalendrier a owl:Class ;
+    rdfs:label "Agent Calendrier" ;
+    rdfs:comment "Agent specialiste qui surveille les evenements du calendrier pour creer des intentions proactives (ex: prechauffage)." ;
+    rdfs:subClassOf :Agent .
+
+:AgentConfort a owl:Class ;
+    rdfs:label "Agent Confort" ;
+    rdfs:comment "Agent specialise dans la gestion du confort des occupants." ;
+    rdfs:subClassOf :Agent .
+
+:AgentEcoEnergie a owl:Class ;
+    rdfs:label "Agent Economie energie" ;
+    rdfs:comment "Agent specialise dans l'optimisation de la consommation energetique." ;
+    rdfs:subClassOf :Agent .
+
+:AgentExecution a owl:Class ;
+    rdfs:label "Agent Actionneur" ;
+    rdfs:comment "Agent qui traduit les decisions en commandes physiques pour les equipements." ;
+    rdfs:subClassOf :Agent .
+
+:AgentMediateur a owl:Class ;
+    rdfs:label "Agent Mediateur" ;
+    rdfs:comment "Agent specialiste qui arbitre les objections entre les intentions." ;
+    rdfs:subClassOf :Agent .
+
+:AgentMediateur1 a :AgentMediateur,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Mediateur" ;
+    :typeAgent "Mediation" .
+
+:AgentPerception a owl:Class ;
+    rdfs:label "Agent Donnees" ;
+    rdfs:comment "Agent qui collecte et publie les donnees des capteurs." ;
+    rdfs:subClassOf :Agent .
+
+:AgentPlanificateur a owl:Class ;
+    rdfs:label "Agent Planificateur" ;
+    rdfs:comment "Agent specialiste qui raffine une intention en un plan d'action concret via la simulation." ;
+    rdfs:subClassOf :Agent .
+
+:AgentQualiteAir a owl:Class ;
+    rdfs:label "Agent Qualite Air" ;
+    rdfs:comment "Agent specialise dans la surveillance et la gestion de la qualite de l'air." ;
+    rdfs:subClassOf :Agent .
+
+:AgentSimulation a owl:Class ;
+    rdfs:label "Agent Simulation" ;
+    rdfs:comment "Agent qui execute des simulations pour predire les impacts." ;
+    rdfs:subClassOf :Agent .
+
+:AgentStratege a owl:Class ;
+    rdfs:label "Agent Stratege" ;
+    rdfs:comment "Agent specialiste qui optimise le plan d'action en choisissant l'intention la plus synergique." ;
+    rdfs:subClassOf :Agent .
+
+:AmeliorationBienEtre a owl:Class ;
+    rdfs:label "Amelioration du Bien-etre (Rythme Circadien)" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:AugmentationLuminositeNaturelle a owl:Class ;
+    rdfs:label "Augmentation de la Luminosite Naturelle" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:BatimentPrincipal a owl:NamedIndividual ;
+    :contientEtage :Etage1,
+        :EtageRDC ;
+    :nomZone "Batiment Principal" ;
+    :volume 10000.0 .
+
+:BesoinChauffage a owl:Class ;
+    rdfs:label "Besoin Chauffage" ;
+    rdfs:comment "Indique qu'une piece a un besoin de chauffage (temperature trop basse)." ;
+    rdfs:subClassOf :Besoin .
+
+:BesoinEconomieEnergie a owl:Class ;
+    rdfs:label "Besoin d'economie d'energie" ;
+    rdfs:comment "Besoin de reduire la consommation d'energie." ;
+    rdfs:subClassOf :Besoin .
+
+:BesoinRafraichissement_20250922152348236561 a :BesoinRafraichissement ;
+    :creeLe "2025-09-22T15:23:48.236663"^^xsd:dateTime ;
+    :description "Température (25.0°C) trop élevée."^^xsd:string ;
+    :genereParAgent :AgentConfort1 ;
+    :viseZone :Bureau1 .
+
+:BesoinRafraichissement_20250922152357885652 a :BesoinRafraichissement ;
+    :creeLe "2025-09-22T15:23:57.885749"^^xsd:dateTime ;
+    :description "Température (24.0°C) trop élevée."^^xsd:string ;
+    :genereParAgent :AgentConfort1 ;
+    :viseZone :Bureau1 .
+
+:BesoinReductionLuminosite a owl:Class ;
+    rdfs:label "Besoin de Reduction de Luminosite" ;
+    rdfs:comment "Indique qu'une piece est trop lumineuse (luminosite trop elevee)." ;
+    rdfs:subClassOf :Besoin .
+
+:BesoinVentilation_20250922152357885806 a :BesoinVentilation ;
+    :creeLe "2025-09-22T15:23:57.885867"^^xsd:dateTime ;
+    :description "CO2 (950.0ppm) trop élevé."^^xsd:string ;
+    :genereParAgent :AgentConfort1 ;
+    :viseZone :Bureau1 .
+
+:Bureau a owl:Class ;
+    rdfs:label "Bureau" ;
+    rdfs:comment "Type specifique de piece : un bureau de travail." ;
+    rdfs:subClassOf :Piece .
+
+:CO2 a owl:Class ;
+    rdfs:label "CO2" ;
+    rdfs:comment "Capteur de dioxyde de carbone." ;
+    rdfs:subClassOf :Capteur .
+
+:CapteurCO2Bureau1 a :CO2,
+        owl:NamedIndividual ;
+    :aPourCO2Actuel :MesureCO2_20250922132347961958,
+        :MesureCO2_20250922132357743418,
+        :MesureCO2_20250922132411329911,
+        :MesureCO2_Bureau1_Initiale .
+
+:CapteurHumiditeBureau1 a :Humidite,
+        owl:NamedIndividual ;
+    :aPourHumiditeActuelle :MesureHumidite_20250922132347961958,
+        :MesureHumidite_20250922132357743418,
+        :MesureHumidite_20250922132411329911,
+        :MesureHumidite_Bureau1_Initiale .
+
+:CapteurLuminositeBureau1 a :Luminosite,
+        owl:NamedIndividual ;
+    :aPourLuminositeActuelle :MesureLuminosite_20250922132347961958,
+        :MesureLuminosite_20250922132357743418,
+        :MesureLuminosite_20250922132411329911,
+        :MesureLuminosite_Bureau1_Initiale .
+
+:CapteurOccupationBureau1 a :Occupation,
+        owl:NamedIndividual ;
+    :aPourOccupationActuelle :MesureOccupation_20250922132347961958,
+        :MesureOccupation_20250922132357743418,
+        :MesureOccupation_20250922132411329911 .
+
+:CapteurTempBureau1 a :Temperature,
+        owl:NamedIndividual ;
+    :aPourTemperatureActuelle :MesureTemp_20250922132347961958,
+        :MesureTemp_20250922132357743418,
+        :MesureTemp_20250922132411329911,
+        :MesureTemperature_Bureau1_Initiale .
+
+:Celsius a :UniteDeMesure,
+        owl:NamedIndividual .
+
+:Climatiseur a owl:Class ;
+    rdfs:label "Climatiseur" ;
+    rdfs:comment "Un systeme de climatisation pour le rafraichissement." ;
+    rdfs:subClassOf :Actionneur .
+
+:ContreProposition a owl:Class ;
+    rdfs:label "Contre-Proposition" ;
+    rdfs:comment "Une intention alternative proposee dans le cadre d'une objection." ;
+    rdfs:subClassOf :Intention .
+
+:EconomieEnergieChauffage a owl:Class ;
+    rdfs:label "economie d'energie (Chauffage)" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:EconomieEnergieRafraichissement a owl:Class ;
+    rdfs:label "economie d'energie (Rafraichissement)" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:Etage1 a :Etage,
+        owl:NamedIndividual ;
+    :contientPiece :Bureau1 ;
+    :nomZone "Premier etage" .
+
+:EtageRDC a :Etage,
+        owl:NamedIndividual ;
+    :contientPiece :SalleReunion1 ;
+    :nomZone "Rez-de-Chaussee" .
+
+:Eteint a :Eteint,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "eteint" ;
+    rdfs:comment "L'eclairage est eteint." ;
+    rdfs:subClassOf :Etat .
+
+:Fenetre a owl:Class ;
+    rdfs:label "Fenetre" ;
+    rdfs:comment "Fenetre pouvant etre ouverte ou fermee." ;
+    rdfs:subClassOf :Actionneur .
+
+:LampeBureau1 a :Lampe,
+        owl:NamedIndividual ;
+    :aPourEtat :Actif .
+
+:Lux a :UniteDeMesure,
+        owl:NamedIndividual .
+
+:MesureCO2_20250922132347961958 a :MesureCO2 ;
+    :aPourValeur "500.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureCO2_20250922132357743418 a :MesureCO2 ;
+    :aPourValeur "950.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureCO2_20250922132411329911 a :MesureCO2 ;
+    :aPourValeur "450.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureCO2_Bureau1_Initiale a :MesureCO2,
+        owl:NamedIndividual ;
+    :aPourUnite :PPM ;
+    :aPourValeur 750.0 ;
+    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+:MesureHumidite_20250922132347961958 a :MesureHumidite ;
+    :aPourValeur "55.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureHumidite_20250922132357743418 a :MesureHumidite ;
+    :aPourValeur "60.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureHumidite_20250922132411329911 a :MesureHumidite ;
+    :aPourValeur "55.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureHumidite_Bureau1_Initiale a :MesureHumidite,
+        owl:NamedIndividual ;
+    :aPourUnite :Pourcentage ;
+    :aPourValeur 55.0 ;
+    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+:MesureLuminositeExt_20250922132347961958 a :MesureLuminosite ;
+    :aPourValeur "20000.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureLuminositeExt_20250922132357743418 a :MesureLuminosite ;
+    :aPourValeur "20000.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureLuminositeExt_20250922132411329911 a :MesureLuminosite ;
+    :aPourValeur "5000.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureLuminosite_20250922132347961958 a :MesureLuminosite ;
+    :aPourValeur "1000.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureLuminosite_20250922132357743418 a :MesureLuminosite ;
+    :aPourValeur "600.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureLuminosite_20250922132411329911 a :MesureLuminosite ;
+    :aPourValeur "300.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureLuminosite_Bureau1_Initiale a :MesureLuminosite,
+        owl:NamedIndividual ;
+    :aPourUnite :Lux ;
+    :aPourValeur 520.0 ;
+    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+:MesureOccupation_20250922132347961958 a :MesureOccupation ;
+    :aPourValeur 1 ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureOccupation_20250922132357743418 a :MesureOccupation ;
+    :aPourValeur 1 ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureOccupation_20250922132411329911 a :MesureOccupation ;
+    :aPourValeur 0 ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureTempExt_20250922132347961958 a :MesureTemperature ;
+    :aPourValeur "19.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureTempExt_20250922132357743418 a :MesureTemperature ;
+    :aPourValeur "19.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureTempExt_20250922132411329911 a :MesureTemperature ;
+    :aPourValeur "10.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureTemp_20250922132347961958 a :MesureTemperature ;
+    :aPourValeur "25.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:47.961958+00:00"^^xsd:dateTime .
+
+:MesureTemp_20250922132357743418 a :MesureTemperature ;
+    :aPourValeur "24.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:23:57.743418+00:00"^^xsd:dateTime .
+
+:MesureTemp_20250922132411329911 a :MesureTemperature ;
+    :aPourValeur "17.0"^^xsd:float ;
+    :timestamp "2025-09-22T13:24:11.329911+00:00"^^xsd:dateTime .
+
+:MesureTemperature_Bureau1_Initiale a :MesureTemperature,
+        owl:NamedIndividual ;
+    :aPourUnite :Celsius ;
+    :aPourValeur 17.0 ;
+    :timestamp "2025-07-23T15:30:00"^^xsd:dateTime .
+
+:OccupantJean a :Occupant,
+        owl:NamedIndividual ;
+    :occupe :Bureau1 ;
+    :preferenceCO2 800.0 ;
+    :preferenceLuminosite 500.0 ;
+    :preferenceTemperature 21.0 .
+
+:Occupation a owl:Class ;
+    rdfs:label "Occupation" ;
+    rdfs:comment "Capteur d'occupation." ;
+    rdfs:subClassOf :Capteur .
+
+:Ouverte a :Ouverte,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "Ouverte" ;
+    rdfs:comment "La fenetre est ouverte." ;
+    rdfs:subClassOf :Etat .
+
+:PPM a :UniteDeMesure,
+        owl:NamedIndividual .
+
+:Pourcentage a :UniteDeMesure,
+        owl:NamedIndividual .
+
+:Radiateur a owl:Class ;
+    rdfs:label "Radiateur" ;
+    rdfs:comment "Un radiateur utilise pour le chauffage." ;
+    rdfs:subClassOf :Actionneur .
+
+:RadiateurBureau1 a :Radiateur,
+        owl:NamedIndividual ;
+    :aPourEtat :Inactif .
+
+:Ventilation a owl:Class ;
+    rdfs:label "Ventilation" ;
+    rdfs:comment "Systeme de ventilation." ;
+    rdfs:subClassOf :Actionneur .
+
+:VentilationBureau1 a :Ventilation,
+        owl:NamedIndividual ;
+    :aPourEtat :Inactif .
+
+:Volet a owl:Class ;
+    rdfs:label "Volet" ;
+    rdfs:comment "Un volet ou un store pouvant etre ouvert ou ferme pour contrôler la lumiere et l'apport solaire." ;
+    rdfs:subClassOf :Actionneur .
+
+:VoletBureau1 a :Volet,
+        owl:NamedIndividual ;
+    :aPourEtat :Ouvert .
+
+:aPourCO2Actuel a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour CO2 actuel" ;
+    rdfs:comment "La mesure de CO2 actuelle pour cette piece." ;
+    rdfs:domain :Piece .
+
+:aPourLuminositeActuelle a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour luminosite actuelle" ;
+    rdfs:comment "La mesure de luminosite actuelle pour cette piece." ;
+    rdfs:domain :Piece .
+
+:aPourTemperatureActuelle a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour temperature actuelle" ;
+    rdfs:comment "La mesure de temperature actuelle pour cette piece." ;
+    rdfs:domain :Piece .
+
+:estEnConflitAvec a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "est en conflit avec" ;
+    rdfs:comment "Indique qu'une intention est en conflit avec une autre intention." ;
+    rdfs:domain :Intention ;
+    rdfs:range :Intention .
+
+:estOccupee a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "est occupee" ;
+    rdfs:comment "Indique si la piece est actuellement occupee." ;
+    rdfs:domain :Piece ;
+    rdfs:range xsd:boolean .
+
+:Actif a :Actif,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "Actif" ;
+    rdfs:comment "L'equipement est actif." ;
+    rdfs:subClassOf :Etat .
+
+:BesoinRafraichissement a owl:Class ;
+    rdfs:label "Besoin Rafraichissement" ;
+    rdfs:comment "Indique qu'une piece a un besoin de rafraichissement (temperature trop haute)." ;
+    rdfs:subClassOf :Besoin .
+
+:BesoinVentilation a owl:Class ;
+    rdfs:label "Besoin Ventilation" ;
+    rdfs:comment "Indique qu'une piece a un besoin de ventilation (CO2 trop eleve)." ;
+    rdfs:subClassOf :Besoin .
+
+:Fermee a :Fermee,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "Fermee" ;
+    rdfs:comment "La fenetre est fermee." ;
+    rdfs:subClassOf :Etat .
+
+:Humidite a owl:Class ;
+    rdfs:label "Humidite" ;
+    rdfs:comment "Capteur d'humidite." ;
+    rdfs:subClassOf :Capteur .
+
+:Luminosite a owl:Class ;
+    rdfs:label "Luminosite" ;
+    rdfs:comment "Capteur de luminosite." ;
+    rdfs:subClassOf :Capteur .
+
+:Objection a owl:Class ;
+    rdfs:label "Objection" ;
+    rdfs:comment "Une objection soulevee par un agent a l'encontre d'une intention existante." ;
+    rdfs:subClassOf owl:Thing .
+
+:Temperature a owl:Class ;
+    rdfs:label "Temperature" ;
+    rdfs:comment "Capteur de temperature." ;
+    rdfs:subClassOf :Capteur .
+
+:aPourCibleEquipement a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour cible equipement" ;
+    rdfs:comment "Indique l'equipement (capteur ou actionneur) cible d'une intention." ;
+    rdfs:domain :Intention ;
+    rdfs:range :Equipement .
+
+:aPourEtat a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "a pour etat" ;
+    rdfs:comment "L'etat actuel de l'equipement." ;
+    rdfs:domain :Equipement ;
+    rdfs:range :Etat .
+
+:contientEquipement a owl:ObjectProperty ;
+    rdfs:label "contient equipement" ;
+    rdfs:comment "Relie un espace a un equipement qu'il contient." ;
+    rdfs:domain :Espace ;
+    rdfs:range :Equipement .
+
+:e a swrl:Variable .
+
+:proposeEtatActionneur a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "propose etat actionneur" ;
+    rdfs:comment "L'etat d'actionneur specifique propose par cette intention (ex: EtatActif, EtatOuverte)." ;
+    rdfs:domain :Intention ;
+    rdfs:range :Etat .
+
+:s1 a swrl:Variable .
+
+:s2 a swrl:Variable .
+
+:ActionExecutee a owl:Class ;
+    rdfs:label "Action Executee" ;
+    rdfs:comment "Enregistrement d'une action physique executee par un actionneur." ;
+    rdfs:subClassOf owl:Thing .
+
+:AgentConfort1 a :AgentConfort,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Confort" ;
+    :typeAgent "Confort" .
+
+:AgentExecution1 a :AgentExecution,
+        owl:NamedIndividual ;
+    :interagitDans :Bureau1,
+        :SalleReunion1 ;
+    :nomAgent "Agent Actionneur" ;
+    :typeAgent "Actionneur" .
+
+:Allume a :Allume,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "Allume" ;
+    rdfs:comment "L'eclairage est allume." ;
+    rdfs:subClassOf :Etat .
+
+:Lampe a owl:Class ;
+    rdfs:label "Lampe" ;
+    rdfs:comment "Un dispositif d'eclairage." ;
+    rdfs:subClassOf :Actionneur .
+
+:MesureOccupation a owl:Class ;
+    rdfs:label "Mesure d'Occupation" ;
+    rdfs:comment "Mesure de l'occupation d'une zone, incluant le nombre de personnes." ;
+    rdfs:subClassOf :Mesure .
+
+:aPourValeur a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "a pour valeur" ;
+    rdfs:comment "La valeur numerique de la mesure." ;
+    rdfs:domain :Mesure ;
+    rdfs:range xsd:decimal .
+
+:ConflitResolu a owl:Class ;
+    rdfs:label "Conflit Resolu" ;
+    rdfs:comment "Enregistrement d'une decision prise par le mediateur pour arbitrer une objection." ;
+    rdfs:subClassOf :Resolution .
+
+:Etage a owl:Class ;
+    rdfs:label "etage" ;
+    rdfs:comment "Niveau ou plancher d'un batiment." ;
+    rdfs:subClassOf :Espace .
+
+:EvenementCalendrier a owl:Class ;
+    rdfs:label "evenement de Calendrier" ;
+    rdfs:comment "Represente un evenement planifie, comme une reunion ou l'arrivee d'un occupant." ;
+    rdfs:subClassOf owl:Thing .
+
+:FenetreBureau1 a :Fenetre,
+        owl:NamedIndividual ;
+    :aPourEtat :Fermee .
+
+:Inactif a :Inactif,
+        owl:Class,
+        owl:NamedIndividual ;
+    rdfs:label "Inactif" ;
+    rdfs:comment "L'equipement est inactif." ;
+    rdfs:subClassOf :Etat .
+
+:MesureCO2 a owl:Class ;
+    rdfs:label "Mesure CO2" ;
+    rdfs:comment "Mesure de dioxyde de carbone." ;
+    rdfs:subClassOf :Mesure .
+
+:MesureHumidite a owl:Class ;
+    rdfs:label "Mesure Humidite" ;
+    rdfs:comment "Mesure d'humidite." ;
+    rdfs:subClassOf :Mesure .
+
+:ReductionHumidite a owl:Class ;
+    rdfs:label "Reduction de l'Humidite" ;
+    rdfs:subClassOf :BeneficeAdditionnel .
+
+:Simulation a owl:Class ;
+    rdfs:label "Simulation" ;
+    rdfs:comment "Une requete de simulation pour evaluer un scenario, avec ses parametres d'entree." .
+
+:aPourBesoin a owl:ObjectProperty ;
+    rdfs:label "a pour besoin" ;
+    rdfs:comment "Relie une piece a un besoin identifie la concernant." ;
+    rdfs:domain :Espace ;
+    rdfs:range :Besoin .
+
+:Capteur a owl:Class ;
+    rdfs:label "Capteur" ;
+    rdfs:comment "Dispositif physique qui collecte des donnees." ;
+    rdfs:subClassOf :Equipement .
+
+:UniteDeMesure a owl:Class ;
+    rdfs:label "Unite de Mesure" ;
+    rdfs:comment "Une unite de mesure standard (ex: Celsius, PPM)." .
+
+:Equipement a owl:Class ;
+    rdfs:label "equipement" ;
+    rdfs:comment "Dispositif physique contrôlable ou observable dans le batiment." .
+
+:Occupant a owl:Class ;
+    rdfs:label "Occupant" ;
+    rdfs:comment "Personne occupant une zone du batiment." ;
+    rdfs:subClassOf owl:Thing .
+
+:StatutIntention a owl:Class ;
+    rdfs:label "Statut d'Intention" ;
+    rdfs:comment "Represente un etat dans le cycle de vie d'une intention." .
+
+:l a swrl:Variable .
+
+:m a swrl:Variable .
+
+:val a swrl:Variable .
+
+:BeneficeAdditionnel a owl:Class ;
+    rdfs:label "Benefice Additionnel" ;
+    rdfs:comment "Un effet positif ou une synergie resultant d'une action qui n'etait pas son objectif principal." ;
+    rdfs:subClassOf owl:Thing .
+
+:MesureLuminosite a owl:Class ;
+    rdfs:label "Mesure Luminosite" ;
+    rdfs:comment "Mesure de luminosite." ;
+    rdfs:subClassOf :Mesure .
+
+:MesureTemperature a owl:Class ;
+    rdfs:label "Mesure Temperature" ;
+    rdfs:comment "Mesure de temperature." ;
+    rdfs:subClassOf :Mesure .
+
+:Actionneur a owl:Class ;
+    rdfs:label "Actionneur" ;
+    rdfs:comment "Dispositif physique qui execute une action." ;
+    rdfs:subClassOf :Equipement .
+
+:Besoin a owl:Class ;
+    rdfs:label "Besoin" ;
+    rdfs:comment "Classe generique pour un besoin identifie dans le batiment." ;
+    rdfs:subClassOf owl:Thing .
+
+:Conflit a owl:Class ;
+    rdfs:label "Conflit" ;
+    rdfs:comment "Desaccord detecte entre des intentions ou des objectifs." ;
+    rdfs:subClassOf owl:Thing .
+
+:SalleReunion1 a owl:NamedIndividual ;
+    :nomZone "Salle de Reunion 1" ;
+    :volume 50.0 .
+
+:SimulationResult a owl:Class ;
+    rdfs:label "Resultat de Simulation" ;
+    rdfs:comment "L'ensemble des predictions retournees par une simulation." .
+
+:aPourBeneficeAdditionnel a owl:ObjectProperty ;
+    rdfs:label "a pour benefice additionnel" ;
+    rdfs:comment "Relie une intention (action) a un benefice synergique qu'elle produit." ;
+    rdfs:domain :Intention ;
+    rdfs:range :BeneficeAdditionnel .
+
+:Etat a owl:Class ;
+    rdfs:label "etat" ;
+    rdfs:comment "etat d'un equipement ou d'une entite." ;
+    rdfs:subClassOf owl:Thing .
+
+:Mesure a owl:Class ;
+    rdfs:label "Mesure" ;
+    rdfs:comment "Observation ou lecture d'une grandeur physique." ;
+    rdfs:subClassOf owl:Thing .
+
+:Resolution a owl:Class ;
+    rdfs:label "Resolution" ;
+    rdfs:comment "Une decision finale prise par un agent pour resoudre un probleme ou un debat." .
+
+:Espace a owl:Class ;
+    rdfs:label "Espace" ;
+    rdfs:comment "Un concept abstrait pour tout espace physique delimite." ;
+    rdfs:subClassOf owl:Thing .
+
+:Piece a owl:Class ;
+    rdfs:label "Piece" ;
+    rdfs:comment "Espace clos a l'interieur d'un batiment, comme un bureau ou une salle." ;
+    rdfs:subClassOf :Espace .
+
+:p a swrl:Variable .
+
+:Agent a owl:Class ;
+    rdfs:label "Agent" ;
+    rdfs:comment "Entite logicielle qui exprime des intentions ou execute des actions." ;
+    rdfs:subClassOf owl:Thing .
+
+:Bureau1 a :Bureau,
+        owl:NamedIndividual ;
+    :aPourBesoin :BesoinRafraichissement_20250922152348236561,
+        :BesoinRafraichissement_20250922152357885652,
+        :BesoinVentilation_20250922152357885806 ;
+    :capaciteThermique 100000.0 ;
+    :capaciteThermiqueMurs 5000000.0 ;
+    :contientEquipement :CapteurCO2Bureau1,
+        :CapteurHumiditeBureau1,
+        :CapteurLuminositeBureau1,
+        :CapteurOccupationBureau1,
+        :CapteurTempBureau1,
+        :FenetreBureau1,
+        :LampeBureau1,
+        :RadiateurBureau1,
+        :VentilationBureau1,
+        :VoletBureau1 ;
+    :estOccupee false ;
+    :facteurSolaire 0.6 ;
+    :gainSolaireMax 400.0 ;
+    :nomZone "Bureau 1" ;
+    :resistanceThermiqueMurs 0.1 ;
+    :surfaceVitree 3.5 ;
+    :volume 30.0 .
+
+:Intention a owl:Class ;
+    rdfs:label "Intention" ;
+    rdfs:comment "Objectif ou proposition d'action exprimee par un agent." ;
+    rdfs:subClassOf owl:Thing .
+
+[] a swrl:Imp ;
+    rdfs:label "S2" ;
+    rdfs:comment "Si le CO2 depasse 1000 ppm, un besoin de ventilation est deduit." ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:ClassAtom ;
+                    swrl:argument1 :p ;
+                    swrl:classPredicate :Piece ] ;
+            rdf:rest [ a swrl:AtomList ;
+                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                            swrl:argument1 :p ;
+                            swrl:argument2 :m ;
+                            swrl:propertyPredicate :aPourCO2Actuel ] ;
+                    rdf:rest [ a swrl:AtomList ;
+                            rdf:first [ a swrl:DatavaluedPropertyAtom ;
+                                    swrl:argument1 :m ;
+                                    swrl:argument2 :val ;
+                                    swrl:propertyPredicate :aPourValeur ] ;
+                            rdf:rest [ a swrl:AtomList ;
+                                    rdf:first [ a swrl:BuiltinAtom ;
+                                            swrl:arguments ( :val 1000.0 ) ;
+                                            swrl:builtin swrlb:greaterThan ] ;
+                                    rdf:rest () ] ] ] ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ClassAtom ;
+                                    swrl:argument1 _:n389462b32178461fa22b6b840f65229db24 ;
+                                    swrl:classPredicate :BesoinVentilation ] ;
+                            rdf:rest () ] ;
+                    swrl:propertyPredicate :aPourBesoin ] ;
+            rdf:rest () ] .
+
+[] a swrl:Imp ;
+    rdfs:label "S3" ;
+    rdfs:comment "Deux intentions visant le meme equipement avec des etats finaux differents sont en conflit." ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :i1 ;
+                    swrl:argument2 :e ;
+                    swrl:propertyPredicate :aPourCibleEquipement ] ;
+            rdf:rest [ a swrl:AtomList ;
+                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                            swrl:argument1 :i2 ;
+                            swrl:argument2 :e ;
+                            swrl:propertyPredicate :aPourCibleEquipement ] ;
+                    rdf:rest [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ObjectPropertyAtom ;
+                                    swrl:argument1 :i1 ;
+                                    swrl:argument2 :s1 ;
+                                    swrl:propertyPredicate :proposeEtatActionneur ] ;
+                            rdf:rest [ a swrl:AtomList ;
+                                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                                            swrl:argument1 :i2 ;
+                                            swrl:argument2 :s2 ;
+                                            swrl:propertyPredicate :proposeEtatActionneur ] ;
+                                    rdf:rest [ a swrl:AtomList ;
+                                            rdf:first [ a swrl:BuiltinAtom ;
+                                                    swrl:arguments ( :i1 :i2 ) ;
+                                                    swrl:builtin swrlb:notEqual ] ;
+                                            rdf:rest [ a swrl:AtomList ;
+                                                    rdf:first [ a swrl:BuiltinAtom ;
+                                                            swrl:arguments ( :s1 :s2 ) ;
+                                                            swrl:builtin swrlb:notEqual ] ;
+                                                    rdf:rest () ] ] ] ] ] ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :i1 ;
+                    swrl:argument2 :i2 ;
+                    swrl:propertyPredicate :estEnConflitAvec ] ;
+            rdf:rest () ] .
+
+[] a swrl:Imp ;
+    rdfs:label "S4" ;
+    rdfs:comment "Si une piece est inoccupee et une lampe est allumee, un besoin d'economie d'energie est deduit." ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:DatavaluedPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 false ;
+                    swrl:propertyPredicate :estOccupee ] ;
+            rdf:rest [ a swrl:AtomList ;
+                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                            swrl:argument1 :p ;
+                            swrl:argument2 :l ;
+                            swrl:propertyPredicate :contientEquipement ] ;
+                    rdf:rest [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ClassAtom ;
+                                    swrl:argument1 :l ;
+                                    swrl:classPredicate :Lampe ] ;
+                            rdf:rest [ a swrl:AtomList ;
+                                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                                            swrl:argument1 :l ;
+                                            swrl:argument2 :Allume ;
+                                            swrl:propertyPredicate :aPourEtat ] ;
+                                    rdf:rest () ] ] ] ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ClassAtom ;
+                                    swrl:argument1 _:n389462b32178461fa22b6b840f65229db24 ;
+                                    swrl:classPredicate :BesoinEconomieEnergie ] ;
+                            rdf:rest () ] ;
+                    swrl:propertyPredicate :aPourBesoin ] ;
+            rdf:rest () ] .
+
+[] a swrl:Imp ;
+    rdfs:label "S5" ;
+    rdfs:comment "Si la luminosite est superieure a 1200 Lux et une lampe est allumee, un besoin de reduction de luminosite est deduit." ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 :m ;
+                    swrl:propertyPredicate :aPourLuminositeActuelle ] ;
+            rdf:rest [ a swrl:AtomList ;
+                    rdf:first [ a swrl:DatavaluedPropertyAtom ;
+                            swrl:argument1 :m ;
+                            swrl:argument2 :val ;
+                            swrl:propertyPredicate :aPourValeur ] ;
+                    rdf:rest [ a swrl:AtomList ;
+                            rdf:first [ a swrl:BuiltinAtom ;
+                                    swrl:arguments ( :val 1200.0 ) ;
+                                    swrl:builtin swrlb:greaterThan ] ;
+                            rdf:rest [ a swrl:AtomList ;
+                                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                                            swrl:argument1 :p ;
+                                            swrl:argument2 :l ;
+                                            swrl:propertyPredicate :contientEquipement ] ;
+                                    rdf:rest [ a swrl:AtomList ;
+                                            rdf:first [ a swrl:ClassAtom ;
+                                                    swrl:argument1 :l ;
+                                                    swrl:classPredicate :Lampe ] ;
+                                            rdf:rest [ a swrl:AtomList ;
+                                                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                                                            swrl:argument1 :l ;
+                                                            swrl:argument2 :Allume ;
+                                                            swrl:propertyPredicate :aPourEtat ] ;
+                                                    rdf:rest () ] ] ] ] ] ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ClassAtom ;
+                                    swrl:argument1 _:n389462b32178461fa22b6b840f65229db24 ;
+                                    swrl:classPredicate :BesoinReductionLuminosite ] ;
+                            rdf:rest () ] ;
+                    swrl:propertyPredicate :aPourBesoin ] ;
+            rdf:rest () ] .
+
+[] a swrl:Imp ;
+    rdfs:label "S1" ;
+    rdfs:comment "Si la temperature est inferieure a 19°C, un besoin de chauffage est deduit." ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:ClassAtom ;
+                    swrl:argument1 :p ;
+                    swrl:classPredicate :Piece ] ;
+            rdf:rest [ a swrl:AtomList ;
+                    rdf:first [ a swrl:ObjectPropertyAtom ;
+                            swrl:argument1 :p ;
+                            swrl:argument2 :m ;
+                            swrl:propertyPredicate :aPourTemperatureActuelle ] ;
+                    rdf:rest [ a swrl:AtomList ;
+                            rdf:first [ a swrl:DatavaluedPropertyAtom ;
+                                    swrl:argument1 :m ;
+                                    swrl:argument2 :val ;
+                                    swrl:propertyPredicate :aPourValeur ] ;
+                            rdf:rest [ a swrl:AtomList ;
+                                    rdf:first [ a swrl:BuiltinAtom ;
+                                            swrl:arguments ( :val 19.0 ) ;
+                                            swrl:builtin swrlb:lessThan ] ;
+                                    rdf:rest () ] ] ] ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:ObjectPropertyAtom ;
+                    swrl:argument1 :p ;
+                    swrl:argument2 [ a swrl:AtomList ;
+                            rdf:first [ a swrl:ClassAtom ;
+                                    swrl:argument1 _:n389462b32178461fa22b6b840f65229db24 ;
+                                    swrl:classPredicate :BesoinChauffage ] ;
+                            rdf:rest () ] ;
+                    swrl:propertyPredicate :aPourBesoin ] ;
+            rdf:rest () ] .
+
