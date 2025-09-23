@@ -27,7 +27,7 @@ cd SMA-Smart-Building
 ```
 Installez les dépendances Python nécessaires :
 ```bash
-pip install rdflib openai python-dotenv jupyterlab
+pip install -r requirements.txt
 ```
 ## Configuration
 Le système a besoin de clés API pour interroger les modèles de langage (LLM).
