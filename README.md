@@ -17,25 +17,13 @@ Suivez ces étapes pour lancer une simulation.
 
 * Python **3.8+**
 * Git 
-* Un environnement virtuel (recommandé)
 
 ### 2. Installation
 
 Clonez ce dépôt sur votre machine locale :
 ```bash
-git clone [https://github.com/ton-nom-utilisateur/ton-projet.git](https://github.com/ton-nom-utilisateur/ton-projet.git)
-cd ton-projet
-```
-Créez et activez un environnement virtuel :
-#### Sur macOS/Linux
-```bash
-python3 -m venv env
-source env/bin/activate
-```
-#### Sur Windows
-```bash
-python -m venv env
-env\Scripts\activate
+git clone https://github.com/elhassane1230/SMA-Smart-Building.git
+cd SMA-Smart-Building
 ```
 Installez les dépendances Python nécessaires :
 ```bash
