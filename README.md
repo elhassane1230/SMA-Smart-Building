@@ -18,7 +18,7 @@ Suivez ces étapes pour lancer une simulation.
 * Python **3.8+**
 * Git
 * Jupyter Lab
-* * Un environnement virtuel (recommandé)
+* Un environnement virtuel (recommandé)
 
 ### 2. Installation
 
