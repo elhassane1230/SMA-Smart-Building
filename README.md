@@ -17,7 +17,7 @@ Suivez ces étapes pour lancer une simulation.
 
 * Python **3.8+**
 * Git
-* Jupyter NoteBook
+* Jupyter Lab
 
 ### 2. Installation
 
