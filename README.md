@@ -16,7 +16,8 @@ Suivez ces étapes pour lancer une simulation.
 ### 1. Prérequis
 
 * Python **3.8+**
-* Git 
+* Git
+* Jupyter NoteBook
 
 ### 2. Installation
 
